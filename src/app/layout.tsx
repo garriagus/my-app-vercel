@@ -1,13 +1,14 @@
-import DeployButton from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import HeaderAuth from "@/components/header-auth";
+
+
+
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import NavBar from "@/components/navbar"
-import Link from "next/link";
 import "./globals.css";
+import { EnvVarWarning } from "@/components/env-var-warning";
+import HeaderAuth from "@/components/header-auth";
+import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
 
-      <body className="bg-background text-foreground">
+      <body className="bg-background text-foreground ">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -37,10 +38,8 @@ export default function RootLayout({
         >
           <main className="min-h-screen  flex-col items-center">
             <div className="flex-1 w-full flex-col gap-20 items-center">
-              <NavBar></NavBar>
-              {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
-
-              <div className=" flex-col gap-20 max-w-5xl p-5">
+            <NavBar authComponent={!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />  } />
+              <div className=" flex-col gap-20 p-5">
                 {children}
               </div>
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
@@ -55,7 +54,6 @@ export default function RootLayout({
                     Supabase
                   </a>
                 </p>
-                <ThemeSwitcher />
               </footer>
             </div>
           </main>

@@ -47,7 +47,7 @@ export default function Page() {
 export default function FetchDataSteps() {
   return (
     <ol className="flex flex-col gap-6">
-      <TutorialStep title="Create some tables and insert some data">
+      <TutorialStep title="aaa">
         <p>
           Head over to the{" "}
           <a
