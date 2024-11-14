@@ -10,8 +10,8 @@ export default async function Index() {
         <div className="aurora" style={{ zIndex: -1 }}></div>
         <div className="aurora" style={{ zIndex: -1 }}></div>
         <div className="aurora" style={{ zIndex: -1 }}></div>
+
         
-       aa
       </main>
     </>
   );

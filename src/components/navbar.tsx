@@ -18,21 +18,8 @@ const Nav = ({ authComponent }: NavProps) => {
     <>
       <header className="border-b border-gray-300 py-2">
         <div className="flex justify-between items-center xl:max-w-7xl xl:mx-auto max-w-full px-[8%] flex-wrap">
-          <Link href="/">
-            <Image
-              src={"/file.svg"}
-              alt="logo"
-              width={70}
-              height={55}
-              className="cursor-pointer"
-            />
-          </Link>
-          <FiMenu
-            className="lg:hidden block h-6 w-6 cursor-pointer"
-            onClick={() => setOpen(!open)}
-          />
           <nav className={`${open ? "block" : "hidden"} lg:flex lg:items-center lg:w-auto w-full`}>
-            <ul className="text-base text-gray-600 lg:flex lg:justify-between">
+            <ul className="text-base text-slate-900 lg:flex lg:justify-between dark:text-gray-100">
               <li className="lg:px-5 py-2 hover:text-blue-500 font-semibold">
                 <Link href="/">Inicio</Link>
               </li>
@@ -42,13 +29,12 @@ const Nav = ({ authComponent }: NavProps) => {
               <li className="lg:px-5 py-2 hover:text-blue-500 font-semibold">
                 <Link href="/proyectos">Proyectos</Link>
               </li>
-            </ul>   
+              {/* Aquí se renderiza el componente condicional */}
+              {authComponent}
+              <ThemeSwitcher />
+            </ul>
           </nav>
-      
-          {/* Aquí se renderiza el componente condicional */}
-          {authComponent}
-          <ThemeSwitcher />
-        </div> 
+        </div>
       </header>
     </>
   );

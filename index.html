@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberNex: Encrypted Reality</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #ff00ff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --border-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'VT323', monospace;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style-type: none;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+            text-shadow: 0 0 10px var(--secondary-color);
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+
+        aside {
+            flex: 1;
+        }
+
+        main {
+            flex: 2;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .widget {
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .link-list ul {
+            list-style-type: none;
+        }
+
+        .glitch-link {
+            color: var(--text-color);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            padding: 5px 0;
+            overflow: hidden;
+        }
+
+        .glitch-link::before,
+        .glitch-link::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-color);
+        }
+
+        .glitch-link::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--secondary-color);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-link::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--primary-color);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(19px, 9999px, 44px, 0);
+            }
+            100% {
+                clip: rect(63px, 9999px, 99px, 0);
+            }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% {
+                clip: rect(79px, 9999px, 13px, 0);
+            }
+            100% {
+                clip: rect(27px, 9999px, 85px, 0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        #system-status, #encrypted-messages, #glitch-terminal, #reality-distortion {
+            height: 200px;
+            overflow-y: auto;
+            font-size: 0.9em;
+            padding: 10px;
+            background-color: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--primary-color);
+        }
+
+        .cursor-trail {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 1s;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            aside, main {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#archive">ARCHIVE</a></li>
+                <li><a href="#logs">LOGS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <aside class="sidebar left">
+                <div class="widget">
+                    <h3>System Status</h3>
+                    <div id="system-status"></div>
+                </div>
+                <div class="widget">
+                    <h3>Encrypted Messages</h3>
+                    <div id="encrypted-messages"></div>
+                </div>
+            </aside>
+            <main>
+                <h1>Welcome to CyberNex</h1>
+                <p>You've entered a realm where reality blurs with digital nightmares. Proceed with caution.</p>
+                <div class="link-list">
+                    <h2>Nexus Points</h2>
+                    <ul>
+                        <li><a href="#" class="glitch-link">Anomaly Database</a></li>
+                        <li><a href="#" class="glitch-link">Cryptid Sightings</a></li>
+                        <li><a href="#" class="glitch-link">Paranormal Incidents</a></li>
+                        <li><a href="#" class="glitch-link">Digital Exorcisms</a></li>
+                        <li><a href="#" class="glitch-link">Glitch Art Gallery</a></li>
+                    </ul>
+                </div>
+            </main>
+            <aside class="sidebar right">
+                <div class="widget">
+                    <h3>Glitch Terminal</h3>
+                    <div id="glitch-terminal"></div>
+                </div>
+                <div class="widget">
+                    <h3>Reality Distortion</h3>
+                    <div id="reality-distortion"></div>
+                </div>
+            </aside>
+        </div>
+        <footer>
+            <p>CyberNex &copy; 2024 | Enter at your own risk</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initSystemStatus();
+            initEncryptedMessages();
+            initGlitchTerminal();
+            initRealityDistortion();
+            initGlitchLinks();
+        });
+
+        function initSystemStatus() {
+            const statusElement = document.getElementById('system-status');
+            const statuses = [
+                'System online',
+                'Firewall: Active',
+                'Intrusion detected',
+                'Reality matrix: Unstable',
+                'Quantum fluctuations: Normal',
+                'Dark web connection: Established',
+                'Anomaly containment: 87% effective'
+            ];
+
+            function updateStatus() {
+                const status = statuses[Math.floor(Math.random() * statuses.length)];
+                const timestamp = new Date().toLocaleTimeString();
+                statusElement.innerHTML += `<div>[${timestamp}] ${status}</div>`;
+                statusElement.scrollTop = statusElement.scrollHeight;
+            }
+
+            setInterval(updateStatus, 3000);
+            updateStatus();
+        }
+
+        function initEncryptedMessages() {
+            const messagesElement = document.getElementById('encrypted-messages');
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:"<>?';
+
+            function generateEncryptedMessage() {
+                let result = '';
+                const length = Math.floor(Math.random() * 20) + 10;
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+
+            function addEncryptedMessage() {
+                const message = generateEncryptedMessage();
+                messagesElement.innerHTML += `<div>${message}</div>`;
+                messagesElement.scrollTop = messagesElement.scrollHeight;
+            }
+
+            setInterval(addEncryptedMessage, 5000);
+            addEncryptedMessage();
+        }
+
+        function initGlitchTerminal() {
+            const terminalElement = document.getElementById('glitch-terminal');
+            const commands = [
+                'sudo hack reality',
+                'ping void.null',
+                'decrypt nightmare.exe',
+                'cat /dev/consciousness',
+                'ssh darkmatter@universe',
+                'curl -s https://mind.upload',
+                'grep -r "paranormal" /var/log/reality'
+            ];
+
+            function simulateTyping(text, element) {
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(interval);
+                        element.innerHTML += '<br>> ';
+                    }
+                }, 100);
+            }
+
+            function runCommand() {
+                const command = commands[Math.floor(Math.random() * commands.length)];
+                const commandElement = document.createElement('div');
+                terminalElement.appendChild(commandElement);
+                simulateTyping(command, commandElement);
+            }
+
+            setInterval(runCommand, 8000);
+            runCommand();
+        }
+
+        function initRealityDistortion() {
+            const distortionElement = document.getElementById('reality-distortion');
+            const glitchPhrases = [
+                'Reality shard detected',
+                'Temporal anomaly increasing',
+                'Quantum entanglement stabilized',
+                'Parallel universe breach imminent',
+                'Consciousness fragmentation at 63%',
+                'Psychic interference detected',
+                'Mandela effect probability: 89%'
+            ];
+
+            function addDistortionEffect() {
+                const phrase = glitchPhrases[Math.floor(Math.random() * glitchPhrases.length)];
+                const glitchElement = document.createElement('div');
+                glitchElement.textContent = phrase;
+                glitchElement.style.position = 'relative';
+                glitchElement.style.animation = `glitch ${Math.random() * 2 + 1}s infinite`;
+                distortionElement.appendChild(glitchElement);
+
+                if (distortionElement.children.length > 5) {
+                    distortionElement.removeChild(distortionElement.firstChild);
+                }
+            }
+
+            setInterval(addDistortionEffect, 4000);
+            addDistortionEffect();
+        }
+
+        function initGlitchLinks() {
+            const links = document.querySelectorAll('.glitch-link');
+            links.forEach(link => {
+                link.setAttribute('data-text', link.textContent);
+                link.addEventListener('mouseover', () => {
+                    link.style.animation = 'glitch 0.3s infinite';
+                });
+                link.addEventListener('mouseout', () => {
+                    link.style.animation = 'none';
+                });
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.className = 'cursor-trail';
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+            document.body.appendChild(cursor);
+
+            setTimeout(() => {
+                cursor.remove();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
