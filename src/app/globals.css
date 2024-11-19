@@ -3,238 +3,148 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #00ff00;
-  --secondary-color: #ff00ff;
-  --background-color: #000000;
-  --text-color: #ffffff;
-  --border-color: #333333;
+  /* BASE THEME */
+  --bg: #D1C48C;
+  --text-color: #7904DB;
+
+  /* DARK THEME */
+  --bg-dark: #5F2F86;
+  --text-color-dark: #DBB004;
+
+  --accent: #305C40;
+  --muted: #04DB55;
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Roboto Slab', serif;
+  --font-monospace: 'Fira Code', monospace;
+  --font-barlow: 'Barlow', sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@font-face {
+  font-family: "Barlow";
+  src: url("https://res.cloudinary.com/dsvsyrtoz/raw/upload/v1718846713/barlow_a5qh9p.woff2") format("woff2-variations");
+  font-stretch: 300% 500%;
+  font-weight: 22 188;
+  font-style: normal;
 }
 
 @layer base {
   :root {
-    --background: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(184, 76%, 63%) 100%);
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    background-color: var(--bg);
+    color: var(--text-color);
+    /* Asignado como texto principal */
+    --card: var(--background);
+    /* Asumiendo que las tarjetas usan el fondo principal */
+    --card-foreground: var(--text-color);
+    --popover: var(--background);
+    /* Similar a las tarjetas */
+    --popover-foreground: var(--text-color);
+    --primary: var(--primary);
+    --primary-foreground: var(--text-color);
+    /* Texto dentro de elementos primarios */
+    --secondary: var(--secondary);
+    --secondary-foreground: var(--background);
+    /* Fondo de texto secundario invertido */
+    --muted: var(--muted);
+    --muted-foreground: var(--text-color);
+    --accent: var(--accent);
+    --accent-foreground: var(--text-color);
+    --destructive: hsl(0, 84.2%, 60.2%);
+    /* Conservando valores específicos si no están en root */
+    --destructive-foreground: var(--background);
+    --border: var(--accent);
+    /* Se puede ajustar si tienes un color específico para bordes */
+    --input: var(--secondary);
+    /* Basado en el color secundario */
+    --ring: var(--primary);
+    /* Usando el color principal */
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --aurora-color-start: rgb(177, 22, 197);
-    --aurora-color-end: rgb(255, 255, 255);    
+    --chart-1: var(--primary);
+    /* Usando colores temáticos para gráficas */
+    --chart-2: var(--secondary);
+    --chart-3: var(--accent);
+    --chart-4: var(--muted);
+    --chart-5: var(--background);
+    --aurora-color-start: var(--primary);
+    --aurora-color-end: var(--background);
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    background-color: var(--bg-dark);
+    color: var(--text-color-dark);
+    --foreground: hsl(0, 0%, 98%);
+    --card: hsl(0, 0%, 3.9%);
+    --card-foreground: hsl(0, 0%, 98%);
+    --popover: hsl(0, 0%, 3.9%);
+    --popover-foreground: hsl(0, 0%, 98%);
+    --primary: hsl(0, 0%, 98%);
+    --primary-foreground: hsl(0, 0%, 9%);
+    --secondary: hsl(0, 0%, 14.9%);
+    --secondary-foreground: hsl(0, 0%, 98%);
+    --muted: hsl(0, 0%, 14.9%);
+    --muted-foreground: hsl(0, 0%, 63.9%);
+    --accent: hsl(0, 0%, 14.9%);
+    --accent-foreground: hsl(0, 0%, 98%);
+    --destructive: hsl(0, 62.8%, 30.6%);
+    --destructive-foreground: hsl(0, 0%, 98%);
+    --border: hsl(0, 0%, 14.9%);
+    --input: hsl(0, 0%, 14.9%);
+    --ring: hsl(0, 0%, 83.1%);
+    --chart-1: hsl(220, 70%, 50%);
+    --chart-2: hsl(160, 60%, 45%);
+    --chart-3: hsl(30, 80%, 55%);
+    --chart-4: hsl(280, 65%, 60%);
+    --chart-5: hsl(340, 75%, 55%);
     --aurora-color-start: rgba(151, 30, 87, 0.2);
     --aurora-color-end: rgba(41, 74, 50, 0.02);
   }
 }
 
 
+html,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html * {
+  box-sizing: inherit;
+}
+
 body {
-  font-family: 'VT323', monospace;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  font-family: 'Barlow';
   line-height: 1.6;
   overflow-x: hidden;
+  font-variation-settings: "wght" 100, "wdth" 300;
+  font-size: 14px;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-nav {
-  background-color: rgba(0, 255, 0, 0.1);
-  border: 1px solid var(--primary-color);
-  margin-bottom: 20px;
-}
-
-nav ul {
+header p {
+  font-size: 28px;
+  font-variation-settings: "wght" 88, "wdth" 500;
   display: flex;
-  justify-content: space-around;
-  list-style-type: none;
-  padding: 10px 0;
 }
 
-nav a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-size: 1.2em;
-  transition: all 0.3s ease;
+header p span {
+  text-transform: none;
+  font-size: 1.1em;
 }
 
-nav a:hover {
-  color: var(--secondary-color);
-  text-shadow: 0 0 10px var(--secondary-color);
-}
 
-.content {
+/* links */
+a {
+  pointer-events: all;
+  background-color: var(--color);
+  color: var(--background);
+  align-items: center;
+  border-radius: 9999px;
+  cursor: pointer;
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  margin: 0 ;
+  transition: all 150ms ease;
+  width: auto;
+  max-width: 200px;
+  font-variation-settings: "wght" 125, "wdth" 400;
+  line-height: 1em;
 }
 
-aside {
-  flex: 1;
-}
-
-main {
-  flex: 2;
-  border: 1px solid var(--border-color);
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.widget {
-  border: 1px solid var(--border-color);
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-h1, h2, h3 {
-  color: var(--primary-color);
-  margin-bottom: 15px;
-}
-
-.link-list ul {
-  list-style-type: none;
-}
-
-.glitch-link {
-  color: var(--text-color);
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  padding: 5px 0;
-  overflow: hidden;
-}
-
-.glitch-link::before,
-.glitch-link::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--background-color);
-}
-
-.glitch-link::before {
-  left: 2px;
-  text-shadow: -2px 0 var(--secondary-color);
-  clip: rect(24px, 550px, 90px, 0);
-  animation: glitch-anim-2 3s infinite linear alternate-reverse;
-}
-
-.glitch-link::after {
-  left: -2px;
-  text-shadow: -2px 0 var(--primary-color);
-  clip: rect(85px, 550px, 140px, 0);
-  animation: glitch-anim 2.5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim {
-  0% {
-      clip: rect(19px, 9999px, 44px, 0);
-  }
-  100% {
-      clip: rect(63px, 9999px, 99px, 0);
-  }
-}
-
-@keyframes glitch-anim-2 {
-  0% {
-      clip: rect(79px, 9999px, 13px, 0);
-  }
-  100% {
-      clip: rect(27px, 9999px, 85px, 0);
-  }
-}
-
-footer {
-  text-align: center;
-  margin-top: 20px;
-  padding: 10px;
-  border-top: 1px solid var(--border-color);
-}
-
-#system-status, #encrypted-messages, #glitch-terminal, #reality-distortion {
-  height: 200px;
-  overflow-y: auto;
-  font-size: 0.9em;
-  padding: 10px;
-  background-color: rgba(0, 255, 0, 0.1);
-  border: 1px solid var(--primary-color);
-}
-
-.cursor-trail {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background-color: var(--primary-color);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.7;
-  transition: opacity 1s;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .content {
-      flex-direction: column;
-  }
-  
-  aside, main {
-      width: 100%;
-  }
-}

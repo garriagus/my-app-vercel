@@ -15,7 +15,7 @@ export default async function AuthButton() {
   if (!hasEnvVars) {
     return (
       <>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center ">
           <div>
             <Badge
               variant={"default"}
@@ -58,9 +58,9 @@ export default async function AuthButton() {
       </form>
     </div>
   ) : (
-    <div className="flex gap-2">
+    <div className="flex gap-2 text-xl">
       <Button asChild size="sm" variant={"outline"}>
-        <Link href="/sign-in">Ingresar</Link>
+        <Link  href="/sign-in">Ingresar</Link>
       </Button>
       <Button asChild size="sm" variant={"default"}>
         <Link href="/sign-up">Registrarse</Link>

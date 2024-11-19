@@ -1,383 +1,938 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberNex: Encrypted Reality</title>
+<article>
+    <a href="https://codepen.io/Andrew__Alva" title="Shader by Andrew__Alva" id="andrew-bits" target="_blank">Shader by @Andrew__Alva</a>
+<header>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
         :root {
-            --primary-color: #00ff00;
-            --secondary-color: #ff00ff;
-            --background-color: #000000;
-            --text-color: #ffffff;
-            --border-color: #333333;
-        }
+	--background: #f5b726;
+	--color: #ff2129;
+	--accent: #D9D9D9;
+	--font-family: 'Barlow', sans-serif;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+@font-face {
+	font-family: "Barlow";
+	src: url("https://res.cloudinary.com/dsvsyrtoz/raw/upload/v1718846713/barlow_a5qh9p.woff2") format("woff2-variations");
+	font-stretch: 300% 500%;
+	font-weight: 22 188;
+	font-style: normal;
+}
 
-        body {
-            font-family: 'VT323', monospace;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+html,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+html * {
+	box-sizing: inherit;
+}
 
-        nav {
-            background-color: rgba(0, 255, 0, 0.1);
-            border: 1px solid var(--primary-color);
-            margin-bottom: 20px;
-        }
+body {
+	font-family: 'Barlow';
+	text-rendering: optimizeSpeed;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-variation-settings: "wght"100, "wdth"300;
+	transition: background-color 230ms ease-in-out;
+	font-size: 16px;
+}
 
-        nav ul {
-            display: flex;
-            justify-content: space-around;
-            list-style-type: none;
-            padding: 10px 0;
-        }
+header p {
+	font-size: 28px;
+	font-variation-settings: "wght"88, "wdth"500;
+	display: flex;
+	margin: 0;
+	justify-content: center;
+	text-transform: uppercase;
+}
 
-        nav a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-        }
+header p span {
+	text-transform: none;
+	font-size: 1.1em;
+}
 
-        nav a:hover {
-            color: var(--secondary-color);
-            text-shadow: 0 0 10px var(--secondary-color);
-        }
+canvas {
+	position: absolute;
+	left: 0;
+	top: 0;
+	pointer-events: none;
+}
 
-        .content {
-            display: flex;
-            gap: 20px;
-        }
+/* links */
 
-        aside {
-            flex: 1;
-        }
+a#logo {
+	position: absolute;
+	display: block;
+	left: 0;
+	top: 0;
+	background-color: transparent;
+	opacity: 1;
+	z-index: 1;
+	padding: 0;
+	margin: 1em;
+	width: max(10vw, 200px);
+}
+a#andrew-bits {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: auto;
+	min-width: none;
+	max-width: none;
+	text-transform: uppercase;
+	text-decoration: none;
+	margin-top: 1em;
+	padding: .25em 1em;
+}
+a#work-link {
+	color: var(--color);
+	position: absolute;
+	right: 0;
+	bottom: 0;
+    background-color: transparent;
+    width: auto;
+    margin: 1em;
+    padding: 0;
+	text-align: right;
+}
 
-        main {
-            flex: 2;
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
+figure {
+	margin: 0;
+	padding: 0;
+	float: right;
+	font-variation-settings: "wght" 80, "wdth"400;
+}
 
-        .widget {
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+a#work-link img {
+    max-width: 200px;
+		max-height: 200px;
+    object-position: right;
+    object-fit: cover;
+    text-align: right;
+    display: inline;
+}
 
-        h1, h2, h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
+figcaption {
+	text-align: right;
+	padding-top: .5em;
+    width: 100%;
+    display: inline-block;
+}
 
-        .link-list ul {
-            list-style-type: none;
-        }
+svg {
+	height: auto;
+	width: 100%;
+}
+path {
+	fill: var(--color)
+}
 
-        .glitch-link {
-            color: var(--text-color);
-            text-decoration: none;
-            position: relative;
-            display: inline-block;
-            padding: 5px 0;
-            overflow: hidden;
-        }
+a:hover {
+	background-color: var(--background);
+	color: var(--color);
+}
 
-        .glitch-link::before,
-        .glitch-link::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--background-color);
-        }
+a:hover {
+	transform: scale(.95);
+	opacity: .8;
+}
 
-        .glitch-link::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--secondary-color);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
+span {
+	user-select: none;
+}
 
-        .glitch-link::after {
-            left: -2px;
-            text-shadow: -2px 0 var(--primary-color);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
+h1 {
+	font-variation-settings: "wght"150, "wdth"300;
+	margin: 0;
+	padding: 0;
+	font-size: max(10vw, 90px);
+}
 
-        @keyframes glitch-anim {
-            0% {
-                clip: rect(19px, 9999px, 44px, 0);
-            }
-            100% {
-                clip: rect(63px, 9999px, 99px, 0);
-            }
-        }
+/* text variations */
+.title-variation {
+	font-variation-settings: "wght"150, "wdth"300;
+	line-height: .95em
+}
 
-        @keyframes glitch-anim-2 {
-            0% {
-                clip: rect(79px, 9999px, 13px, 0);
-            }
-            100% {
-                clip: rect(27px, 9999px, 85px, 0);
-            }
-        }
+.subtitle-variation {
+	font-variation-settings: "wght"125, "wdth"400;
+	line-height: .95em
+}
 
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            border-top: 1px solid var(--border-color);
-        }
+.regular-variation {
+	font-variation-settings: "wght"90, "wdth"500;
+	line-height: .95em
+}
 
-        #system-status, #encrypted-messages, #glitch-terminal, #reality-distortion {
-            height: 200px;
-            overflow-y: auto;
-            font-size: 0.9em;
-            padding: 10px;
-            background-color: rgba(0, 255, 0, 0.1);
-            border: 1px solid var(--primary-color);
-        }
+/* <- text variations */
+/* wrapper  */
+article {
+	background-color: var(--background);
+	color: var(--color);
+	transition: all 250ms linear;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+}
 
-        .cursor-trail {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.7;
-            transition: opacity 1s;
-        }
+/* labels -> */
+label {
+	align-items: center;
+	justify-content: center;
+	padding: 1em;
+	display: flex;
+	height: .5em;
+	width: 50%;
+	min-width: 290px;
+	position: relative;
+	margin: 0 auto;
+	font-size: 16px;
+}
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-            
-            aside, main {
-                width: 100%;
-            }
-        }
+label span {
+	width: 32px;
+	display: block;
+}
+
+label span.attr {
+	position: absolute;
+	left: 50%;
+	top: -.25em;
+	color: var(--accent);
+	transform: translateX(-50%)
+}
+
+/* Inputs -> */
+input[type='text'] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: var(--background);
+	color: var(--color);
+	border-color: currentColor;
+	border-radius: 9999px;
+	border-width: 1px;
+	flex: 1 1 auto;
+	font-variation-settings: "wght"125, "wdth"400;
+	padding: calc(.5rem - 1px) .75rem;
+	text-align: center;
+	margin: 1em 0 1em 0;
+	outline: none;
+	font-size: 24px;
+	border: 1px solid var(--accent);
+}
+
+/* Input Range -> */
+/* INPUT TRACK */
+input[type='range'] {
+	--shadow: var(--accent);
+	--track-bg: var(--accent);
+	--size: 1.25em;
+	--track-border-radius: .5em;
+	--border-radius: 50%;
+	background: var(--accent);
+	appearance: none;
+	height: 2px;
+	outline: none;
+	border-radius: .5em;
+	width: 100%;
+	margin: 1.5em 0;
+	max-width: 640px;
+	display: block;
+	margin: 2em auto;
+}
+
+/* thumb */
+/* webkit thumb */
+input[type='range']::-webkit-slider-thumb {
+	background: var(--track-bg);
+	border: 0px solid var(--shadow);
+	border-radius: var(--border-radius);
+	border: 0 solid var(--color);
+	height: var(--size);
+	width: var(--size);
+	cursor: pointer;
+	/*extra*/
+	appearance: none;
+}
+
+/* mozilla thumb */
+input[type='range']::-moz-range-thumb {
+	background: var(--track-bg);
+	border: 0px solid var(--shadow);
+	border-radius: var(--border-radius);
+	border: 0 solid var(--color);
+	height: var(--size);
+	width: var(--size);
+	cursor: pointer;
+}
+
+/* edge thumb */
+input[type='range']::-ms-thumb {
+	background: var(--track-bg);
+	border: 0px solid var(--shadow);
+	border-radius: var(--border-radius);
+	border: 0 solid var(--color);
+	height: var(--size);
+	width: var(--size);
+	cursor: pointer;
+}
+
+/* <- Input Range */
     </style>
-</head>
-<body>
-    <div class="container">
-        <nav>
-            <ul>
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#archive">ARCHIVE</a></li>
-                <li><a href="#logs">LOGS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
-        </nav>
-        <div class="content">
-            <aside class="sidebar left">
-                <div class="widget">
-                    <h3>System Status</h3>
-                    <div id="system-status"></div>
-                </div>
-                <div class="widget">
-                    <h3>Encrypted Messages</h3>
-                    <div id="encrypted-messages"></div>
-                </div>
-            </aside>
-            <main>
-                <h1>Welcome to CyberNex</h1>
-                <p>You've entered a realm where reality blurs with digital nightmares. Proceed with caution.</p>
-                <div class="link-list">
-                    <h2>Nexus Points</h2>
-                    <ul>
-                        <li><a href="#" class="glitch-link">Anomaly Database</a></li>
-                        <li><a href="#" class="glitch-link">Cryptid Sightings</a></li>
-                        <li><a href="#" class="glitch-link">Paranormal Incidents</a></li>
-                        <li><a href="#" class="glitch-link">Digital Exorcisms</a></li>
-                        <li><a href="#" class="glitch-link">Glitch Art Gallery</a></li>
-                    </ul>
-                </div>
-            </main>
-            <aside class="sidebar right">
-                <div class="widget">
-                    <h3>Glitch Terminal</h3>
-                    <div id="glitch-terminal"></div>
-                </div>
-                <div class="widget">
-                    <h3>Reality Distortion</h3>
-                    <div id="reality-distortion"></div>
-                </div>
-            </aside>
-        </div>
-        <footer>
-            <p>CyberNex &copy; 2024 | Enter at your own risk</p>
-        </footer>
-    </div>
+  <h1 id="title">BARLOW</h1>
+  <p class="regular-variation">One font, 
+    <span style='font-variation-settings: "wght" 150, "wdth" 490;'>m</span>
+    <span style='font-variation-settings: "wght" 188, "wdth" 300;'>a</span>
+    <span style='font-variation-settings: "wght" 150, "wdth" 415;'>n</span>
+    <span style='font-variation-settings: "wght" 108, "wdth" 300;'>y</span>
+    <span style='font-variation-settings: "wght" 22, "wdth" 300;'>/</span>
+    <span style='font-variation-settings: "wght" 150, "wdth" 410;'>S</span>
+    <span style='font-variation-settings: "wght" 165, "wdth" 380;'>t</span>
+    <span style='font-variation-settings: "wght" 78, "wdth" 320;'>y</span>
+    <span style='font-variation-settings: "wght" 88, "wdth" 450;'>l</span>
+    <span style='font-variation-settings: "wght" 150, "wdth" 300;'>e</span>
+    <span style='font-variation-settings: "wght" 22, "wdth" 500;'>s</span>
+    <span style='font-variation-settings: "wght" 188, "wdth" 500;'>.</span>
+  </p>
+</header>
+<div>
+  <input type="text" placeholder="Try it..." maxlength="20" id="input-title" autocomplete="off">
+  <p id="style-prompt">font-variation-settings: "wght" 130, "wdth" 400;</p>
+  <label for="wght">
+    <span>22</span>
+    <span class="attr">wght</span>
+    <input type="range" min="22" max="188" step="1" value="150" name="wght" id="input-wght">
+    <span>188</span>
+  </label>
+  <label for="wdth">
+    <span>300</span>
+    <span class="attr">wdth</span>
+    <input type="range" min="300" max="500" step="1" value="300" name="wdth" id="input-wdth">
+    <span>500</span>
+  </label>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            initSystemStatus();
-            initEncryptedMessages();
-            initGlitchTerminal();
-            initRealityDistortion();
-            initGlitchLinks();
-        });
-
-        function initSystemStatus() {
-            const statusElement = document.getElementById('system-status');
-            const statuses = [
-                'System online',
-                'Firewall: Active',
-                'Intrusion detected',
-                'Reality matrix: Unstable',
-                'Quantum fluctuations: Normal',
-                'Dark web connection: Established',
-                'Anomaly containment: 87% effective'
-            ];
-
-            function updateStatus() {
-                const status = statuses[Math.floor(Math.random() * statuses.length)];
-                const timestamp = new Date().toLocaleTimeString();
-                statusElement.innerHTML += `<div>[${timestamp}] ${status}</div>`;
-                statusElement.scrollTop = statusElement.scrollHeight;
-            }
-
-            setInterval(updateStatus, 3000);
-            updateStatus();
-        }
-
-        function initEncryptedMessages() {
-            const messagesElement = document.getElementById('encrypted-messages');
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:"<>?';
-
-            function generateEncryptedMessage() {
-                let result = '';
-                const length = Math.floor(Math.random() * 20) + 10;
-                for (let i = 0; i < length; i++) {
-                    result += characters.charAt(Math.floor(Math.random() * characters.length));
-                }
-                return result;
-            }
-
-            function addEncryptedMessage() {
-                const message = generateEncryptedMessage();
-                messagesElement.innerHTML += `<div>${message}</div>`;
-                messagesElement.scrollTop = messagesElement.scrollHeight;
-            }
-
-            setInterval(addEncryptedMessage, 5000);
-            addEncryptedMessage();
-        }
-
-        function initGlitchTerminal() {
-            const terminalElement = document.getElementById('glitch-terminal');
-            const commands = [
-                'sudo hack reality',
-                'ping void.null',
-                'decrypt nightmare.exe',
-                'cat /dev/consciousness',
-                'ssh darkmatter@universe',
-                'curl -s https://mind.upload',
-                'grep -r "paranormal" /var/log/reality'
-            ];
-
-            function simulateTyping(text, element) {
-                let i = 0;
-                const interval = setInterval(() => {
-                    if (i < text.length) {
-                        element.innerHTML += text.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(interval);
-                        element.innerHTML += '<br>> ';
-                    }
-                }, 100);
-            }
-
-            function runCommand() {
-                const command = commands[Math.floor(Math.random() * commands.length)];
-                const commandElement = document.createElement('div');
-                terminalElement.appendChild(commandElement);
-                simulateTyping(command, commandElement);
-            }
-
-            setInterval(runCommand, 8000);
-            runCommand();
-        }
-
-        function initRealityDistortion() {
-            const distortionElement = document.getElementById('reality-distortion');
-            const glitchPhrases = [
-                'Reality shard detected',
-                'Temporal anomaly increasing',
-                'Quantum entanglement stabilized',
-                'Parallel universe breach imminent',
-                'Consciousness fragmentation at 63%',
-                'Psychic interference detected',
-                'Mandela effect probability: 89%'
-            ];
-
-            function addDistortionEffect() {
-                const phrase = glitchPhrases[Math.floor(Math.random() * glitchPhrases.length)];
-                const glitchElement = document.createElement('div');
-                glitchElement.textContent = phrase;
-                glitchElement.style.position = 'relative';
-                glitchElement.style.animation = `glitch ${Math.random() * 2 + 1}s infinite`;
-                distortionElement.appendChild(glitchElement);
-
-                if (distortionElement.children.length > 5) {
-                    distortionElement.removeChild(distortionElement.firstChild);
-                }
-            }
-
-            setInterval(addDistortionEffect, 4000);
-            addDistortionEffect();
-        }
-
-        function initGlitchLinks() {
-            const links = document.querySelectorAll('.glitch-link');
-            links.forEach(link => {
-                link.setAttribute('data-text', link.textContent);
-                link.addEventListener('mouseover', () => {
-                    link.style.animation = 'glitch 0.3s infinite';
-                });
-                link.addEventListener('mouseout', () => {
-                    link.style.animation = 'none';
-                });
-            });
-        }
-
-        document.addEventListener('mousemove', (e) => {
-            const cursor = document.createElement('div');
-            cursor.className = 'cursor-trail';
-            cursor.style.left = e.pageX + 'px';
-            cursor.style.top = e.pageY + 'px';
-            document.body.appendChild(cursor);
-
-            setTimeout(() => {
-                cursor.remove();
-            }, 1000);
-        });
-    </script>
-</body>
-</html>
+</article>
+<a href="https://bienaldeilustracion.com/" target="_blank" id="logo" title="Bienal de Ilustración">    
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="45" viewBox="0 0 100 45" style="enable-background:new 0 0 100 45;" xml:space="preserve">
+  <path d="M0,9.33h6.64c1.31,0,2.37,1.05,2.37,2.31c0,0.44-0.13,0.85-0.36,1.22c0.87,0.71,1.42,1.77,1.42,2.95c0,2.12-1.79,3.87-4,3.87H0L0,9.33L0,9.33z M5.79,13.02c0-0.53-0.42-0.93-0.95-0.93s-0.96,0.41-0.96,0.93c0,0.51,0.43,0.92,0.96,0.92S5.79,13.54,5.79,13.02z M5.79,16c0-0.53-0.42-0.93-0.95-0.93S3.88,15.47,3.88,16c0,0.51,0.43,0.92,0.96,0.92S5.79,16.52,5.79,16z M10.57,9.33h4.35v10.36h-4.35V9.33z M15.73,9.33h8.2v3.5h-3.59c-0.38,0-0.66,0.29-0.66,0.68c0,0.41,0.28,0.68,0.66,0.68h1.2v1.99h2.4v3.5h-8.22V9.33z M24.71,9.33h10.2v10.36h-4.22v-6.31c0-0.47-0.43-0.8-0.88-0.8c-0.55,0-0.89,0.34-0.89,0.8v6.31h-4.22V9.33z M37.7,9.33h8.36v10.36h-4.25v-2.55h-1.84l-0.7,2.55h-4.42L37.7,9.33z M42.31,13.35c0-0.59-0.47-1.05-1.07-1.05c-0.58,0-1.08,0.47-1.08,1.05c0,0.57,0.49,1.03,1.08,1.03C41.83,14.38,42.31,13.92,42.31,13.35z M46.91,9.33h4.35v6.86h2.92v3.5H46.9V9.33H46.91z M57.01,9.33h5.37c3.06,0,5.57,2.33,5.57,5.17c0,2.85-2.52,5.17-5.57,5.17h-5.37V9.33z M63.69,14.51c0-0.81-0.68-1.48-1.52-1.48c-0.84,0-1.53,0.67-1.53,1.48s0.69,1.48,1.53,1.48C63.01,16,63.69,15.32,63.69,14.51z M68.42,9.33h8.2v3.5h-3.59c-0.38,0-0.66,0.29-0.66,0.68c0,0.41,0.28,0.68,0.66,0.68h1.2v1.99h2.4v3.5h-8.2V9.33H68.42z M0,21.85h4.35V32.2H0V21.85z M5.18,21.85h4.35v6.86h2.92v3.5H5.17V21.85H5.18z M23.05,32.19h-10.2V21.84h4.22v6.31c0,0.47,0.43,0.8,0.88,0.8c0.55,0,0.89-0.34,0.89-0.8v-6.31h4.22V32.19z M23.63,28.7h2.1l-0.75-2.73c-0.65-2.39,0.56-4.13,2.85-4.13h3.54v3.5h-1.92l0.77,2.85c0.63,2.31-0.58,4.01-2.87,4.01h-3.7v-3.5H23.63z M33.56,25.33h-2.07v-3.5h8.47v3.5h-2.07v6.86h-4.35v-6.86H33.56z M40.14,21.85h5.32c2.45,0,4.41,1.75,4.41,3.89c0,0.81-0.26,1.56-0.74,2.18h0.97v4.29h-4.22v-2.55h-1.53v2.55h-4.22V21.85z M45.96,25.86c0-0.59-0.47-1.05-1.07-1.05c-0.59,0-1.08,0.47-1.08,1.05c0,0.57,0.49,1.03,1.08,1.03C45.49,26.89,45.96,26.42,45.96,25.86z M52.84,21.85h8.36V32.2h-4.25v-2.55h-1.84l-0.7,2.55h-4.42L52.84,21.85z M57.44,25.86c0-0.59-0.47-1.05-1.07-1.05c-0.58,0-1.08,0.47-1.08,1.05c0,0.57,0.49,1.03,1.08,1.03C56.96,26.89,57.44,26.42,57.44,25.86z M61.66,27.02c0-2.85,2.48-5.17,5.57-5.17h4.98v4.91h-3.28c-0.09-0.67-0.75-1.22-1.48-1.22c-0.84,0-1.53,0.67-1.53,1.48c0,0.81,0.69,1.48,1.53,1.48c0.75,0,1.42-0.55,1.48-1.25h3.28v4.93h-4.98C64.15,32.19,61.66,29.87,61.66,27.02z M73.05,21.85h4.35V32.2h-4.35V21.85z M77.89,27.01c0-2.27,1.52-4.23,3.66-5v-1.78l4.08-1.34v2.14l-1.89,0.62c3.04,0.06,5.56,2.45,5.56,5.36c0,2.98-2.58,5.4-5.69,5.4C80.43,32.4,77.89,29.98,77.89,27.01z M85.1,27.02c0-0.81-0.69-1.48-1.51-1.48c-0.84,0-1.54,0.67-1.54,1.48c0,0.83,0.7,1.48,1.54,1.48C84.41,28.5,85.1,27.85,85.1,27.02z M89.8,21.85H100V32.2h-4.22v-6.32c0-0.47-0.43-0.8-0.88-0.8c-0.55,0-0.89,0.34-0.89,0.8v6.31H89.8V21.85z M55.69,2.92c0.12,0.14,0.18,0.32,0.18,0.55c0,0.22-0.06,0.4-0.17,0.54c-0.12,0.13-0.26,0.2-0.45,0.2H54.9c-0.01,0-0.01,0-0.01,0.01v1.09c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V2.75c0-0.02,0.01-0.04,0.04-0.04h0.66C55.41,2.71,55.57,2.79,55.69,2.92z M55.41,3.79c0.06-0.08,0.09-0.19,0.09-0.32c0-0.13-0.04-0.25-0.09-0.32c-0.06-0.08-0.14-0.12-0.25-0.12h-0.27c-0.01,0-0.01,0-0.01,0.01V3.9c0,0.01,0,0.01,0.01,0.01h0.27C55.27,3.91,55.36,3.88,55.41,3.79z M57.2,5.31L56.85,4.2c0-0.01-0.01-0.01-0.01-0.01h-0.26c-0.01,0-0.01,0-0.01,0.01v1.11c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V2.76c0-0.02,0.01-0.04,0.04-0.04h0.66c0.13,0,0.24,0.04,0.33,0.1c0.09,0.06,0.17,0.16,0.23,0.26c0.05,0.12,0.08,0.24,0.08,0.38c0,0.16-0.04,0.3-0.09,0.41c-0.06,0.12-0.15,0.2-0.26,0.25c-0.01,0.01-0.01,0.01-0.01,0.02l0.38,1.15v0.01c0,0.01-0.01,0.02-0.04,0.02h-0.28C57.22,5.35,57.21,5.34,57.2,5.31z M56.57,3.04v0.84c0,0.01,0,0.01,0.01,0.01h0.27c0.11,0,0.18-0.04,0.25-0.12c0.07-0.08,0.09-0.18,0.09-0.31c0-0.13-0.04-0.24-0.09-0.32s-0.14-0.12-0.25-0.12h-0.27C56.57,3.02,56.57,3.04,56.57,3.04z M59.11,3.02h-0.84c-0.01,0-0.01,0-0.01,0.01v0.81c0,0.01,0,0.01,0.01,0.01h0.51c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04h-0.51c-0.01,0-0.01,0-0.01,0.01V5c0,0.01,0,0.01,0.01,0.01h0.84c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04h-1.18c-0.02,0-0.04-0.01-0.04-0.04V2.74c0-0.02,0.01-0.04,0.04-0.04h1.18c0.02,0,0.04,0.01,0.04,0.04v0.24C59.14,3.01,59.13,3.02,59.11,3.02z M59.59,5.19c-0.12-0.12-0.18-0.29-0.18-0.49v-0.1c0-0.02,0.01-0.04,0.04-0.04h0.27c0.02,0,0.04,0.01,0.04,0.04v0.08c0,0.12,0.02,0.2,0.08,0.28c0.06,0.07,0.13,0.11,0.23,0.11c0.09,0,0.17-0.04,0.23-0.1c0.06-0.07,0.08-0.16,0.08-0.26c0-0.07-0.01-0.13-0.05-0.19s-0.07-0.11-0.12-0.14c-0.05-0.05-0.13-0.11-0.25-0.19c-0.13-0.1-0.23-0.18-0.3-0.24c-0.07-0.07-0.13-0.14-0.18-0.24c-0.05-0.1-0.07-0.2-0.07-0.34c0-0.2,0.06-0.36,0.18-0.48c0.12-0.12,0.27-0.18,0.46-0.18c0.2,0,0.36,0.06,0.47,0.19c0.12,0.13,0.18,0.3,0.18,0.5v0.1c0,0.02-0.01,0.04-0.04,0.04H60.4c-0.02,0-0.04-0.01-0.04-0.04v-0.1c0-0.11-0.02-0.2-0.08-0.28c-0.06-0.07-0.13-0.11-0.23-0.11c-0.08,0-0.15,0.04-0.21,0.1s-0.08,0.14-0.08,0.25c0,0.1,0.02,0.18,0.08,0.25S60,3.78,60.16,3.9c0.15,0.11,0.26,0.2,0.33,0.28c0.07,0.07,0.13,0.14,0.18,0.23c0.04,0.08,0.06,0.18,0.06,0.3c0,0.22-0.06,0.38-0.18,0.5c-0.12,0.13-0.28,0.19-0.47,0.19C59.88,5.37,59.71,5.31,59.59,5.19z M62.28,3.02h-0.84c-0.01,0-0.01,0-0.01,0.01v0.81c0,0.01,0,0.01,0.01,0.01h0.51c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04h-0.51c-0.01,0-0.01,0-0.01,0.01V5c0,0.01,0,0.01,0.01,0.01h0.84c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04H61.1c-0.02,0-0.04-0.01-0.04-0.04V2.74c0-0.02,0.01-0.04,0.04-0.04h1.18c0.02,0,0.04,0.01,0.04,0.04v0.24C62.31,3.01,62.3,3.02,62.28,3.02z M63.76,2.71h0.28c0.02,0,0.04,0.01,0.04,0.04V5.3c0,0.02-0.01,0.04-0.04,0.04h-0.32c-0.02,0-0.04-0.01-0.04-0.04l-0.63-1.71c0,0-0.01-0.01-0.01,0c0,0-0.01,0-0.01,0.01v1.7c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V2.75c0-0.02,0.01-0.04,0.04-0.04h0.32c0.02,0,0.04,0.01,0.04,0.04l0.64,1.71c0,0.01,0.01,0.01,0.01,0.01s0.01,0,0.01-0.01v-1.7C63.73,2.73,63.74,2.71,63.76,2.71z M65.84,2.75v0.24c0,0.02-0.01,0.04-0.04,0.04h-0.49c-0.01,0-0.01,0-0.01,0.01V5.3c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V3.04c0-0.01,0-0.01-0.01-0.01h-0.46c-0.02,0-0.04-0.01-0.04-0.04V2.75c0-0.02,0.01-0.04,0.04-0.04h1.34C65.82,2.71,65.84,2.73,65.84,2.75z M67,5.31l-0.08-0.43V4.87h-0.01H66.3h-0.01v0.01l-0.08,0.43c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.01,0-0.02,0-0.02-0.01c-0.01-0.01-0.01-0.01,0-0.04l0.56-2.55c0-0.02,0.02-0.04,0.04-0.04h0.33c0.02,0,0.04,0.01,0.04,0.04l0.56,2.55v0.01c0,0.02-0.01,0.04-0.04,0.04h-0.28C67.01,5.35,67,5.34,67,5.31z M66.35,4.58h0.5c0.01,0,0.01,0,0.01-0.01l-0.25-1.33c0,0,0-0.01-0.01-0.01c0,0,0,0-0.01,0.01l-0.25,1.33C66.34,4.57,66.34,4.58,66.35,4.58z M7.68,40c-0.13,0.12-0.31,0.19-0.52,0.19H6.51c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01H7.1c0.24,0,0.42,0.06,0.56,0.18c0.13,0.12,0.2,0.3,0.2,0.53c0,0.26-0.09,0.44-0.27,0.55c-0.01,0.01-0.01,0.01-0.01,0.02c0.09,0.06,0.18,0.14,0.23,0.25s0.08,0.23,0.08,0.37C7.88,39.69,7.81,39.87,7.68,40z M6.9,37.95v0.69c0,0.01,0.01,0.02,0.02,0.02h0.19c0.11,0,0.18-0.04,0.24-0.1c0.06-0.06,0.08-0.16,0.08-0.26c0-0.12-0.02-0.22-0.08-0.28c-0.06-0.06-0.14-0.1-0.24-0.1H6.92C6.9,37.93,6.9,37.94,6.9,37.95zM7.36,39.7c0.06-0.07,0.08-0.17,0.08-0.3s-0.02-0.23-0.08-0.31c-0.06-0.08-0.13-0.11-0.24-0.11H6.91c-0.01,0-0.02,0.01-0.02,0.02v0.78c0,0.01,0.01,0.02,0.02,0.02h0.21C7.23,39.81,7.3,39.77,7.36,39.7z M8.53,40.17c-0.01-0.01-0.01-0.02-0.01-0.04V39.1v-0.02l-0.52-1.48c0,0,0-0.01,0-0.02c0-0.02,0.01-0.04,0.04-0.04h0.36c0.02,0,0.05,0.01,0.05,0.04l0.28,0.97c0,0.01,0.01,0.01,0.01,0.01s0.01,0,0.01-0.01l0.28-0.97c0.01-0.02,0.02-0.04,0.05-0.04h0.36c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0,0.04l-0.52,1.48v0.02v1.03c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01H8.55C8.55,40.18,8.54,40.18,8.53,40.17z M11.61,37.65c0.09,0.06,0.18,0.16,0.24,0.28s0.08,0.25,0.08,0.41c0,0.23-0.06,0.41-0.18,0.54s-0.27,0.2-0.46,0.2h-0.32c-0.01,0-0.02,0.01-0.02,0.02v1.04c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.7C11.4,37.56,11.52,37.58,11.61,37.65z M11.41,38.62c0.06-0.07,0.08-0.17,0.08-0.29s-0.02-0.23-0.08-0.3c-0.06-0.07-0.13-0.11-0.23-0.11h-0.23c-0.01,0-0.02,0.01-0.02,0.02v0.77c0,0.01,0.01,0.02,0.02,0.02h0.23C11.29,38.73,11.36,38.69,11.41,38.62z M12.24,40.17c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v2.54c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34C12.25,40.18,12.25,40.18,12.24,40.17z M13.2,40.02c-0.13-0.13-0.19-0.3-0.19-0.51v-1.28c0-0.22,0.06-0.38,0.19-0.51c0.13-0.13,0.3-0.19,0.51-0.19c0.21,0,0.38,0.06,0.51,0.19c0.13,0.13,0.19,0.3,0.19,0.51v0.05c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01l-0.34,0.01c-0.04,0-0.05-0.01-0.05-0.05v-0.1c0-0.08-0.02-0.16-0.07-0.22s-0.12-0.08-0.2-0.08c-0.08,0-0.14,0.02-0.19,0.08c-0.05,0.06-0.07,0.13-0.07,0.22v1.34c0,0.08,0.02,0.16,0.07,0.22c0.05,0.06,0.12,0.08,0.19,0.08c0.08,0,0.14-0.02,0.2-0.08c0.05-0.06,0.07-0.13,0.07-0.22v-0.1c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01l0.34,0.01c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.05c0,0.22-0.06,0.38-0.19,0.51c-0.13,0.13-0.3,0.19-0.51,0.19C13.5,40.22,13.33,40.16,13.2,40.02z M16.14,37.57c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.47c-0.01,0-0.02,0.01-0.02,0.02v2.19c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04v-2.19c0-0.01-0.01-0.02-0.02-0.02h-0.45c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h1.39C16.11,37.56,16.12,37.56,16.14,37.57z M16.5,40.02c-0.13-0.13-0.19-0.3-0.19-0.51v-1.26c0-0.22,0.06-0.38,0.19-0.51c0.13-0.13,0.3-0.19,0.51-0.19s0.39,0.06,0.52,0.19c0.13,0.13,0.2,0.3,0.2,0.51v1.26c0,0.22-0.07,0.38-0.2,0.51c-0.13,0.13-0.31,0.19-0.52,0.19S16.64,40.16,16.5,40.02z M17.23,39.75c0.05-0.06,0.08-0.13,0.08-0.23v-1.31c0-0.1-0.02-0.17-0.08-0.23c-0.05-0.06-0.12-0.08-0.2-0.08c-0.08,0-0.15,0.02-0.2,0.08c-0.05,0.06-0.07,0.13-0.07,0.23v1.31c0,0.1,0.02,0.17,0.07,0.23c0.05,0.06,0.12,0.08,0.2,0.08C17.11,39.84,17.18,39.81,17.23,39.75z M18.11,40.17c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v2.19c0,0.01,0.01,0.02,0.02,0.02h0.81c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-1.21C18.13,40.18,18.12,40.18,18.11,40.17z M19.65,40.17c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01s0.01,0.02,0.01,0.04v2.54c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34C19.67,40.18,19.66,40.18,19.65,40.17z M21.55,37.57c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v2.54c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.39c-0.02,0-0.04-0.01-0.05-0.04l-0.56-1.59c0-0.01-0.01-0.01-0.01-0.01c-0.01,0-0.01,0-0.01,0.01v1.58c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.38c0.02,0,0.04,0.01,0.05,0.04l0.56,1.58c0,0.01,0.01,0.01,0.01,0.01c0.01,0,0.01,0,0.01-0.01V37.6C21.53,37.59,21.54,37.58,21.55,37.57z M23.65,37.92c-0.01,0.01-0.02,0.01-0.04,0.01h-0.81c-0.01,0-0.02,0.01-0.02,0.02v0.71c0,0.01,0.01,0.02,0.02,0.02h0.47c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.47c-0.01,0-0.02,0.01-0.02,0.02v0.72c0,0.01,0.01,0.02,0.02,0.02h0.81c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-1.21c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h1.21c0.01,0,0.02,0,0.04,0.01s0.01,0.02,0.01,0.04v0.29C23.66,37.9,23.65,37.9,23.65,37.92z M35.43,5.37c-0.96,0-1.61-0.62-1.67-1.56c-0.07-1.32,0.78-2.41,2.11-2.41c1.01,0,1.61,0.69,1.66,1.54C37.62,4.37,36.73,5.37,35.43,5.37L35.43,5.37L35.43,5.37z M35.54,4.47c0.57,0,0.82-0.9,0.8-1.51c-0.01-0.34-0.18-0.66-0.57-0.66c-0.59,0-0.84,0.93-0.81,1.48C34.98,4.2,35.18,4.47,35.54,4.47L35.54,4.47L35.54,4.47z M45.93,5.28c-0.25,0.1-0.49,0.1-0.69,0.1c-1.08,0-1.66-0.6-1.72-1.6c-0.06-1.15,0.69-2.35,2.07-2.35c0.77,0,1.34,0.44,1.39,1.16c0.05,0.96-0.83,1.33-2.33,1.29c0.01,0.1,0.06,0.24,0.14,0.34c0.15,0.17,0.39,0.25,0.7,0.25c0.39,0,0.77-0.06,1.25-0.3C46.76,4.1,46.2,5.17,45.93,5.28L45.93,5.28z M45.89,2.57c-0.01-0.17-0.15-0.3-0.4-0.3c-0.5,0-0.76,0.41-0.81,0.74C45.52,3.02,45.92,2.89,45.89,2.57L45.89,2.57L45.89,2.57z M48.6,2.03c0.25,0.63,0.19,0.5,0.24,0.65l-0.01-0.04c2.22-2.45,3.78-2.5,3.78-2.5l-3.55,3.6l0.44-0.24l0.81,1.81h-1.28l-0.23-0.57c-0.11-0.28-0.14-0.42-0.21-0.65h-0.02c-1.12,1.57-2.42,1.53-2.42,1.53l1.9-2.23L47.1,1.53C47.11,1.49,48.27,1.2,48.6,2.03L48.6,2.03z M37.91,2.75c0.06-0.49,0.13-0.66-0.27-1.01c0,0,0.44-0.31,0.87-0.37c0.78-0.12,0.52,0.72,0.52,0.72h0.01c0.31-0.48,0.75-0.68,1.22-0.68c0.59,0,0.87,0.38,0.91,0.69c0.31-0.47,0.76-0.69,1.23-0.69c0.59,0,0.93,0.38,0.96,1.02c0.01,0.16-0.01,0.47-0.04,0.66c0,0-0.14,1.13-0.2,1.52c-0.06,0.4-0.09,0.8-1.23,0.71l0.27-2.1c0.02-0.16,0.04-0.31,0.02-0.45c-0.01-0.24-0.13-0.41-0.36-0.41c-0.34,0-0.65,0.48-0.75,1.23l-0.15,1.02c-0.06,0.4-0.07,0.8-1.2,0.71l0.27-2.1c0.02-0.16,0.04-0.31,0.02-0.44c-0.01-0.24-0.11-0.43-0.34-0.43c-0.34,0-0.68,0.5-0.77,1.23l-0.15,1.02c-0.06,0.4-0.07,0.8-1.2,0.71L37.91,2.75L37.91,2.75z M33.15,5.29c-0.2,0.04-0.52,0.08-0.82,0.08c-1.31,0-2.24-0.78-2.3-1.98c-0.06-1.09,0.4-1.9,1.12-2.38c0.49-0.34,1.08-0.49,1.8-0.48c0.26,0,0.55,0.04,0.74,0.08c0.64,0.14,0.06,1.07,0.06,1.07c-0.18-0.07-0.47-0.14-0.87-0.14s-0.81,0.12-1.07,0.34c-0.37,0.3-0.56,0.78-0.53,1.4c0.04,0.71,0.55,1.16,1.32,1.16c0.32,0,0.68-0.07,1.07-0.24C33.67,4.19,33.46,5.23,33.15,5.29L33.15,5.29z M50.88,4.7c0.14,0,0.25,0.12,0.25,0.26s-0.11,0.26-0.25,0.26c-0.14,0-0.25-0.12-0.25-0.26S50.74,4.7,50.88,4.7L50.88,4.7L50.88,4.7z M50.88,4.65c-0.17,0-0.31,0.14-0.31,0.31c0,0.18,0.14,0.32,0.31,0.32c0.18,0,0.31-0.14,0.31-0.32C51.19,4.8,51.04,4.65,50.88,4.65L50.88,4.65L50.88,4.65z M50.82,5h0.04c0.05,0,0.07,0.01,0.07,0.06c0.01,0.05,0.01,0.08,0.02,0.1h0.06c0-0.01-0.01-0.04-0.02-0.08c-0.01-0.05-0.02-0.08-0.06-0.08l0,0C50.96,4.98,51,4.95,51,4.9c0-0.04-0.01-0.06-0.04-0.07c-0.02-0.01-0.06-0.02-0.11-0.02c-0.04,0-0.07,0-0.09,0.01v0.35h0.06L50.82,5L50.82,5z M50.82,4.84c0.01,0,0.02,0,0.04,0c0.06,0,0.08,0.04,0.08,0.06c0,0.05-0.04,0.06-0.08,0.06h-0.04V4.84L50.82,4.84z M30.93,40.22h-1.82V34.3h5.72c2.45,0,4.41,1.75,4.41,3.89c0,1.17-0.58,2.24-1.53,2.95h1.2v3.51h-9.26L30.93,40.22z M35.35,38.49c0-0.67-0.57-1.22-1.25-1.22c-0.68,0-1.23,0.54-1.23,1.22c0,0.67,0.56,1.22,1.23,1.22 C34.78,39.71,35.35,39.17,35.35,38.49z M39.49,39.46c0-2.95,2.54-5.36,5.72-5.36c3.11,0,5.69,2.42,5.69,5.36c0,2.98-2.58,5.4-5.69,5.4 C42.03,44.86,39.49,42.44,39.49,39.46z M46.7,39.48c0-0.81-0.69-1.48-1.51-1.48c-0.84,0-1.54,0.67-1.54,1.48 c0,0.83,0.7,1.48,1.54,1.48C46,40.97,46.7,40.31,46.7,39.48z M53,40.22h-1.82V34.3h5.72c2.45,0,4.41,1.75,4.41,3.89c0,1.17-0.58,2.24-1.53,2.95h1.2v3.51h-9.26L53,40.22z M57.42,38.49 c0-0.67-0.57-1.22-1.25-1.22s-1.23,0.54-1.23,1.22c0,0.67,0.56,1.22,1.23,1.22S57.42,39.17,57.42,38.49z M67.88,42.77H61.9V34.3h4.22v3.96c0,0.5,0.37,0.86,0.88,0.86s0.89-0.36,0.89-0.86V34.3h4.22v10.36h-4.22V42.77z"/></svg>
+</a>
+<a href="" target="_blank" id="work-link">
+<figure>
+  <img src="https://bienaldeilustracion.com/finalista/erne-vigo/eco.preview.jpg" alt="">
+  <figcaption>Colors extracted from Eco by Erno Vigo.</figcaption>
+</figure>
+</a>
+<script>
+const PALETTES = [{
+src:"/kaori-andrea-hayama-fukumoto/senores-pequenos.preview.jpg",
+bg:"#E0AC9D",
+color:"#B34234",
+accent:"#C08A75"
+},{
+src:"/octavio-bec/el-arcano-de-las-flores.preview.jpg",
+bg:"#151417",
+color:"#D5D3DC",
+accent:"#7D7A84"
+},{
+src:"/erne-vigo/eco.preview.jpg",
+bg:"#9D7C83",
+color:"#FEFCFA",
+accent:"#D4B1A0"
+},{
+src:"/joaquin-carreno-alonso/tlacuachin.preview.jpg",
+bg:"#304446",
+color:"#C2904B",
+accent:"#9B9A92"
+},{
+src:"/g-m-meave/woman-into-stardust.preview.jpg",
+bg:"#4f008f",
+color:"#FFFFFF",
+accent:"#F10300"
+},{
+src:"/gabriela-fernanda-orozco/el-rapto.preview.jpg",
+bg:"#0F0A06",
+color:"#DAC299",
+accent:"#83663D"
+},{
+src:"/diego-escobar/sin-miedo.preview.jpg",
+bg:"#E9E9E9",
+color:"#505050",
+accent:"#9B9B9B"
+},{
+src:"/blcksstar/rutina-mundana.preview.jpg",
+bg:"#192C4A",
+color:"#fa7066",
+accent:"#767E8E"
+},{
+src:"/daniela-mendoza/un-espacio-seguro-para-mi-andar.preview.jpg",
+bg:"#BDB8A5",
+color:"#AD4131",
+accent:"#A58F5A"
+},{
+src:"/andrea-devia-nuno/as-tight-as-you-can.preview.jpg",
+bg:"#4032C5",
+color:"#F39090",
+accent:"#768A63"
+},{
+src:"/carolina-marin-londono/viejismo.preview.jpg",
+bg:"#B8B5B9",
+color:"#254F9B",
+accent:"#E2141E"
+},{
+src:"/carol-cuquetto/alegria-e-furia.preview.jpg",
+bg:"#EFB02B",
+color:"#EC0F05",
+accent:"#EE5305"
+},{
+src:"/meri/chiquiticx.preview.jpg",
+bg:"#2c2c2c",
+color:"#46B26A",
+accent:"#145B2B"
+},{
+src:"/champu-chinito/proxima-estacion.preview.jpg",
+bg:"#9F2A03",
+color:"#C5A431",
+accent:"#636D07"
+},{
+src:"/luna-ana/head-on-fire.preview.jpg",
+bg:"#13150E",
+color:"#E04D0F",
+accent:"#8B826A"
+},{
+src:"/daniel-chonillo/canoa.preview.jpg",
+bg:"#757885",
+color:"#E1D9D9",
+accent:"#C6B495"
+},{
+src:"/lynda-m/volatil.preview.jpg",
+bg:"#000000",
+color:"#D73749",
+accent:"#9B3645"
+},{
+src:"/m-a-cervantes/por-ver.preview.jpg",
+bg:"#16228B",
+color:"#749180",
+accent:"#8D5D5B"
+},{
+src:"/fede-di-pila/hora-magica.preview.jpg",
+bg:"#9F354A",
+color:"#E85B62",
+accent:"#3A304E"
+},{
+src:"/maricarmen-zapatero/sopa-de-cebolla.preview.jpg",
+bg:"#398F6D",
+color:"#DFC53F",
+accent:"#F1F0EE"
+},{
+src:"/carlos-cea/natural-karma.preview.jpg",
+bg:"#5EA14E",
+color:"#DDDBE5",
+accent:"#C9B04B"
+},{
+src:"/ana-sofia-navia-lopez/intermitencia.preview.jpg",
+bg:"#A09E9F",
+color:"#423D42",
+accent:"#5E5C5E"
+},{
+src:"/alvaro-ardiles/this-must-be-the-place.preview.jpg",
+bg:"#F1E4A9",
+color:"#9D6656",
+accent:"#63A4BC"
+},{
+src:"/jesus-gutierrez-miranda/magia-no11.preview.jpg",
+bg:"#CF5E2E",
+color:"#FFFFFF",
+accent:"#CF9441"
+},{
+src:"/lic-dominguez/un-ovni-en-1993.preview.jpg",
+bg:"#3C4246",
+color:"#D8C9C3",
+accent:"#7D827C"
+},{
+src:"/elena-caltz/isobel.preview.jpg",
+bg:"#5C5C5C",
+color:"#FDFDFD",
+accent:"#A2A2A2"
+},{
+src:"/jhonatan-montalvo-chuyo/a-emperatriz.preview.jpg",
+bg:"#744FAE",
+color:"#E9D2B6",
+accent:"#C0983C"
+},{
+src:"/marinoshki/eventos-canonicos-en-playas-de-tijuana.preview.jpg",
+bg:"#243848",
+color:"#827A8B",
+accent:"#4C261E"
+},{
+src:"/charlotte/alora.preview.jpg",
+bg:"#599B5F",
+color:"#EDD1C3",
+accent:"#EC9D98"
+},{
+src:"/emilia-schettino/paralisis-del-sueno.preview.jpg",
+bg:"#728A4F",
+color:"#F6DA9D",
+accent:"#CA4526"
+},{
+src:"/renata-lobaton-flores/dinosaurios.preview.jpg",
+bg:"#FAF8CF",
+color:"#61A3E1",
+accent:"#74883F"
+},{
+src:"/victor-cabanillas/sin-titulo.preview.jpg",
+bg:"#C78B69",
+color:"#5A2016",
+accent:"#A54022"
+},{
+src:"/isidro-r-esquivel/retratos-infernales-la-mina.preview.jpg",
+bg:"#272727",
+color:"#DADADA",
+accent:"#4D4D4D"
+},{
+src:"/caro-fuego/tiempo-aparte.preview.jpg",
+bg:"#E4B4A5",
+color:"#C54B28",
+accent:"#6999BB"
+},{
+src:"/rodrigo-aguilar-vazquez/mercadito-de-sonidos.preview.jpg",
+bg:"#735973",
+color:"#CE7092",
+accent:"#5C172C"
+},{
+src:"/rayame-maria/nos-acostumbramos-a-los-lobos.preview.jpg",
+bg:"#6B472C",
+color:"#0C0A05",
+accent:"#C29167"
+},{
+src:"/elisa-malo/siniestros-del-dia-y-la-noche.preview.jpg",
+bg:"#161616",
+color:"#F4F4F4",
+accent:"#9B9B9B"
+},{
+src:"/alex-servin/ilustrarama.preview.jpg",
+bg:"#E00502",
+color:"#f9e6d5",
+accent:"#3A9789"
+},{
+src:"/jokczan-ruiz/melodia-del-mar.preview.jpg",
+bg:"#618FA1",
+color:"#F5F5F1",
+accent:"#DA9763"
+},{
+src:"/carles-ballesteros/descubrimiento.preview.jpg",
+bg:"#61530F",
+color:"#ffb300",
+accent:"#B9431A"
+},{
+src:"/liao/abraxas.preview.jpg",
+bg:"#0A0807",
+color:"#DDCBB2",
+accent:"#877965"
+},{
+src:"/eugenio-cristo-vivanco/oye.preview.jpg",
+bg:"#7689A9",
+color:"#DDDED9",
+accent:"#606F92"
+},{
+src:"/belen-valverde/familia-elegida.preview.jpg",
+bg:"#493070",
+color:"#DD971E",
+accent:"#748999"
+},{
+src:"/marco-vulgo/la-loteria-de-la-calle.preview.jpg",
+bg:"#3695A1",
+color:"#D3BF9F",
+accent:"#D7AA33"
+},{
+src:"/ro-menendez/fe.preview.jpg",
+bg:"#CCBDDC",
+color:"#405AAF",
+accent:"#F3EDE4"
+},{
+src:"/natalia-pajaro/desdoblandome.preview.jpg",
+bg:"#89A3DC",
+color:"#2A4AB9",
+accent:"#D44531"
+},{
+src:"/maia-judith/caballo.preview.jpg",
+bg:"#A05224",
+color:"#FAF601",
+accent:"#FFF292"
+},{
+src:"/achac/quesadillas.preview.jpg",
+bg:"#CACBC2",
+color:"#0C2C4F",
+accent:"#E3D4A5"
+},{
+src:"/gora/trama.preview.jpg",
+bg:"#D98605",
+color:"#198970",
+accent:"#D61A01"
+},{
+src:"/numecaniq/la-tirania-de-los-ojos.preview.jpg",
+bg:"#020404",
+color:"#F00708",
+accent:"#4F5557"
+},{
+src:"/tamara-cruz-gutierrez/vaiven-salado.preview.jpg",
+bg:"#010710",
+color:"#0F8978",
+accent:"#29258D"
+},{
+src:"/daniel-barreto/ciclos-de-esencia.preview.jpg",
+bg:"#14130c",
+color:"#BF4E48",
+accent:"#07215A"
+},{
+src:"/matt-figueroa/un-pequeno-pulque.preview.jpg",
+bg:"#D79B74",
+color:"#B24225",
+accent:"#582719"
+},{
+src:"/aldair-gonzalez-sanchez/el-baile-del-esqueleto.preview.jpg",
+bg:"#000000",
+color:"#FFFFFF",
+accent:"#9F4A3B"
+},{
+src:"/david-salinas/tomarse-el-tiempo-para-volver-a-la-primera-casa.preview.jpg",
+bg:"#9E935B",
+color:"#182D52",
+accent:"#658B46"
+},{
+src:"/brenda-battaglia-andrade/memoria-intervenida.preview.jpg",
+bg:"#3B4529",
+color:"#D5C8A2",
+accent:"#469B65"
+},{
+src:"/valentina-wilson/entre-humo-y-mariposas.preview.jpg",
+bg:"#050404",
+color:"#A64C1B",
+accent:"#B8A590"
+},{
+src:"/karina-cervantes/el-desierto-tambien-descansa.preview.jpg",
+bg:"#0C090C",
+color:"#DC6D90",
+accent:"#3A7381"
+},{
+src:"/eslovam/introspeccion.preview.jpg",
+bg:"#837D84",
+color:"#131112",
+accent:"#C8C4C8"
+},{
+src:"/edgar-mt/poder.preview.jpg",
+bg:"#F24E66",
+color:"#0B1B0E",
+accent:"#A1B362"
+},{
+src:"/roberta-di-paolo/bicho.preview.jpg",
+bg:"#1C1A12",
+color:"#A5CB67",
+accent:"#6A9655"
+},{
+src:"/jesus-benitez/daf.preview.jpg",
+bg:"#0C0B9B",
+color:"#BDB4C1",
+accent:"#C4745F"
+},{
+src:"/rosenfeldtown/maloco-amazonico.preview.jpg",
+bg:"#A9C3AE",
+color:"#130E08",
+accent:"#A56E47"
+},{
+src:"/daniel-berman/st-de-la-serie-de-banistas.preview.jpg",
+bg:"#E28B67",
+color:"#22151B",
+accent:"#8D0201"
+},{
+src:"/edillys-palomino/dias-de-verano-y-la-espera.preview.jpg",
+bg:"#88ACEB",
+color:"#ECE6D4",
+accent:"#E69E9D"
+},{
+src:"/cesar-st-martin/sprinting-mass.preview.jpg",
+bg:"#A3A3A2",
+color:"#3E3E3E",
+accent:"#41423D"
+},{
+src:"/disturbed-child/por-la-boca-muere-el-pez.preview.jpg",
+bg:"#C6B99D",
+color:"#4C4639",
+accent:"#818075"
+},{
+src:"/alex-lechuga/al-final-de-todo-como-piensas-reaccionar.preview.jpg",
+bg:"#bf5349",
+color:"#F3D19B",
+accent:"#6E8F8A"
+},{
+src:"/luis-safah/arabia-saucito.preview.jpg",
+bg:"#83563D",
+color:"#090704",
+accent:"#C09A79"
+},{
+src:"/andrea-daniela-paredes-velazquez/alas.preview.jpg",
+bg:"#562109",
+color:"#C7CF9A",
+accent:"#AE431E"
+},{
+src:"/daniell-black/my-bff-the-8th.preview.jpg",
+bg:"#53a04f",
+color:"#2d5c83",
+accent:"#D94334"
+},{
+src:"/aaron-cruz/corazon.preview.jpg",
+bg:"#956D87",
+color:"#D6958C",
+accent:"#94394B"
+},{
+src:"/lore-mondragon/amaranto.preview.jpg",
+bg:"#534737",
+color:"#EDD277",
+accent:"#B49D68"
+},{
+src:"/felipe-cavalcante/honk-brasilia-la-musica-brota-en-la-capital.preview.jpg",
+bg:"#091053",
+color:"#EAEFF1",
+accent:"#184C2A"
+},{
+src:"/jordan-ruy-alvarado-chavez/en-lo-oculto.preview.jpg",
+bg:"#242646",
+color:"#C6330B",
+accent:"#D98C2B"
+},{
+src:"/leandro-mangado/calaveras.preview.jpg",
+bg:"#A25843",
+color:"#D5D6CF",
+accent:"#5B463D"
+},{
+src:"/tonny-furia/morpho-1.preview.jpg",
+bg:"#080303",
+color:"#B94530",
+accent:"#294ABB"
+},{
+src:"/azul-portillo/futuro.preview.jpg",
+bg:"#636C98",
+color:"#DCE4EC",
+accent:"#A6CFF5"
+},{
+src:"/irish/sosiego.preview.jpg",
+bg:"#1DB7BF",
+color:"#FFFFFF",
+accent:"#CF2ECF"
+},{
+src:"/jess-bianxi/fijacion.preview.jpg",
+bg:"#64508A",
+color:"#E2996A",
+accent:"#E86A66"
+},{
+src:"/cata-gonzalez/que-ningun-trans-sea-olvidadx.preview.jpg",
+bg:"#5F6B97",
+color:"#FFF",
+accent:"#C679A0"
+},{
+src:"/maria-tuti/creador.preview.jpg",
+bg:"#8B5EC7",
+color:"#FCCA01",
+accent:"#581D16"
+},{
+src:"/somosgallitos/el-ciclo-de-la-vida.preview.jpg",
+bg:"#D4B7DE",
+color:"#0D0C88",
+accent:"#6F43A6"
+},{
+src:"/ulises-mendicutty/libre.preview.jpg",
+bg:"#ec74b4",
+color:"#F4F0F4",
+accent:"#5F52AB"
+},{
+src:"/valeria-hipocampo/tauro.preview.jpg",
+bg:"#F8C76C",
+color:"#77843D",
+accent:"#E89851"
+},{
+src:"/nubikini/inspiring.preview.jpg",
+bg:"#DFBDAF",
+color:"#EA1E03",
+accent:"#3C90E5"
+},{
+src:"/melissa-gabriela/sabana-imaginaria.preview.jpg",
+bg:"#A4D5D8",
+color:"#54473E",
+accent:"#ECE25F"
+},{
+src:"/israpop/como-te-gustaria-ser-recordado.preview.jpg",
+bg:"#000000",
+color:"#F6F6F6",
+accent:"#626262"
+},{
+src:"/mario-maple/viajero-traveler.preview.jpg",
+bg:"#827D87",
+color:"#FFFFFF",
+accent:"#BFBFCD"
+},{
+src:"/yaguas/perdon-hermano-por-tan-poco.preview.jpg",
+bg:"#2B3943",
+color:"#A8A29E",
+accent:"#8C1A17"
+},{
+src:"/cumi-d-tamayo/san-miguel-arcangel.preview.jpg",
+bg:"#3384AF",
+color:"#D6C228",
+accent:"#C5255A"
+},{
+src:"/florencia-pernicone/terror.preview.jpg",
+bg:"#B75847",
+color:"#DABE8A",
+accent:"#6CC092"
+},{
+src:"/fernanda-serafim/ilustracao-realista-de-fantasia.preview.jpg",
+bg:"#60220C",
+color:"#CF9669",
+accent:"#C8310D"
+},{
+src:"/javier-arjona/navegar-un-mar-de-datos.preview.jpg",
+bg:"#62A9B1",
+color:"#1D1B18",
+accent:"#C0C3BD"
+},{
+src:"/youkonejo/yocoya.preview.jpg",
+bg:"#171615",
+color:"#F7F7F6",
+accent:"#7F8078"
+},{
+src:"/federico-calandria/fuerza-natural.preview.jpg",
+bg:"#50A2B0",
+color:"#DDE8E5",
+accent:"#8F8C43"
+},{
+src:"/pete-banenelli/desaparecer.preview.jpg",
+bg:"#0F171F",
+color:"#D2DAE1",
+accent:"#8E6D6F"
+},{
+src:"/amira/promesa-de-amor.preview.jpg",
+bg:"#E85156",
+color:"#FFFFFF",
+accent:"#4C719C"
+},{
+src:"/daniel-kondo/andar-com-fe.preview.jpg",
+bg:"#525820",
+color:"#EAC60E",
+accent:"#BD4C13"
+},{
+src:"/otto-etraud/hermafroditx.preview.jpg",
+bg:"#E8DDA9",
+color:"#A1581A",
+accent:"#738942"
+},{
+src:"/karina-cocq/sinfonia-para-una-semilla.preview.jpg",
+bg:"#99946D",
+color:"#DFE2D1",
+accent:"#668586"
+},{
+src:"/davihero/puntos-de-vista.preview.jpg",
+bg:"#BE6287",
+color:"#F4F5F2",
+accent:"#5D92B4"
+},{
+src:"/santiago-solis/julio.preview.jpg",
+bg:"#c3c3c3",
+color:"#000000",
+accent:"#323232"
+},{
+src:"/comrayo/al-otro-lado.preview.jpg",
+bg:"#797D82",
+color:"#FFFFFE",
+accent:"#D19C5A"
+},{
+src:"/miguel-velasco/este-es-mi-barrio-la-valentin-gomez-farias.preview.jpg",
+bg:"#513A9D",
+color:"#ECEBF0",
+accent:"#B2383D"
+},{
+src:"/andrea-caboara/penumbra.preview.jpg",
+bg:"#15110e",
+color:"#A2D5C9",
+accent:"#2C433C"
+},{
+src:"/majo-corona/sonatas-en-la-selva-onirica.preview.jpg",
+bg:"#171c16",
+color:"#C9764B",
+accent:"#523121"
+},{
+src:"/vero-anaya/chulada.preview.jpg",
+bg:"#8E8573",
+color:"#8E304F",
+accent:"#1A2E43"
+},{
+src:"/daniel-lievano/renacido.preview.jpg",
+bg:"#F9D1B0",
+color:"#AA3115",
+accent:"#E9C469"
+},{
+src:"/rafa-kahlo/un-dia-en-el-metro.preview.jpg",
+bg:"#79C1BC",
+color:"#161616",
+accent:"#F4F5F5"
+},{
+src:"/fabiana-moch/caminantes.preview.jpg",
+bg:"#768990",
+color:"#BDBDB8",
+accent:"#8E875B"
+},{
+src:"/bruno-valasse/perro-raro-etiqueta-de-vino.preview.jpg",
+bg:"#675535",
+color:"#F3F1E4",
+accent:"#56190C"
+},{
+src:"/davespart/que-rabia-todo-veo.preview.jpg",
+bg:"#150A0C",
+color:"#5492C3",
+accent:"#95200C"
+},{
+src:"/nan4san/deva.preview.jpg",
+bg:"#ddd2a6",
+color:"#d1442e",
+accent:"#96b793"
+},{
+src:"/mariana-riera/o-que-vamos-comer-hoje-ou-panico-e-gloria-no-paraiso.preview.jpg",
+bg:"#729694",
+color:"#0D1817",
+accent:"#2A4F50"
+},{
+src:"/manuel-rodriguez-sanchez/viaje-al-mictlan.preview.jpg",
+bg:"#1D4F25",
+color:"#D09655",
+accent:"#D75C22"
+},{
+src:"/alejandra-garcia-y-gutierrez/expandirse.preview.jpg",
+bg:"#607762",
+color:"#CC9265",
+accent:"#851818"
+},{
+src:"/leon-chavez/desatandonos.preview.jpg",
+bg:"#2C2C2C",
+color:"#A9A9A9",
+accent:"#5A5A5A"
+},{
+src:"/nico-gonzalez/atardecer-en-el-tabo.preview.jpg",
+bg:"#D85E0D",
+color:"#EFF2EA",
+accent:"#E3A911"
+},{
+src:"/mariana-villanueva-segovia/las-kokotxas-de-mi-papa.preview.jpg",
+bg:"#084606",
+color:"#F6F9F6",
+accent:"#E7AF13"
+}]
+</script>
