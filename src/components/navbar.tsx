@@ -3,8 +3,6 @@
 
 import Link from 'next/link';
 import React, { ReactNode, useState } from 'react';
-import MobileNav from "@/components/mobileNav";
-import siteMetadata from "@/utils/siteMetadata";
 import navLinks from "@/utils/navLinks";
 import Image from 'next/image';
 import { FiMenu } from 'react-icons/fi';
@@ -15,49 +13,56 @@ interface NavProps {
 }
 
 const Nav = ({ authComponent }: NavProps) => {
-
+  let name;
+  const [open, setOpen] = useState(false)
   return (
-    <header className=''>
-      <nav className="w-full z-20 top-0 mt-4 start-0 border-b border-gray-200 dark:brder-gray-600 ">
-        <div className="mb-2 max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-0 m-0">
-       
-
-          <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button type="button" className="ml-0">
-              {authComponent}
-            </button>
-
-            <MobileNav />
-            <div className='md:mt-0'>
-              <ThemeSwitcher />
-            </div>
-          </div>
-          <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-            id="navbar-sticky"
-          >
-            <ul className="flex flex-col p-4 md:p-0 ml-4 font-medium rounded-lg md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+    <>
+      <header className="border-b border-gray-300 py-2"
+        style={{
+          backgroundImage: 'url(/dalle/dalll-e-2-removebg-preview.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="flex justify-between items-center xl:max-w-7xl xl:mx-auto max-w-full px-[2%] flex-wrap">
+          <Link href="/">
+            <Image
+              src={"/dalle/5-removebg-preview.png"}
+              alt='logo'
+              width={85}
+              height={85}
+              className='cursor-pointer'
+            />
+          </Link>
+          <FiMenu className="lg:hidden block h-6 w-6 cursor-pointer" onClick={() => setOpen(!open)} />
+          <nav className={`${open ? "block" : "hidden"} lg:flex lg:items-center lg:w-auto w-full`}>
+            <ul className="text-base lg:flex lg:justify-between">
               {navLinks
                 .filter((link) => link.href !== "/")
                 .map((link, index) => (
-                  <li key={link.title} className="flex items-center">
-                    {index > 0 && <span className="mx-2">|</span>}
+                  <li className="lg:px-5 py-2 hover:text-blue-500 font-semibold">
+                    {index > 0 && <span className="mx-2">
+                    </span>}
                     <Link
                       href={link.href}
-                      className="block py-2 px-3 rounded md:p-0 hidden sm:block"
                     >
                       {link.title}
                     </Link>
                   </li>
                 ))}
             </ul>
+          </nav>
+          <div className="flex">
+            {authComponent}
+            <ThemeSwitcher />
           </div>
-
         </div>
-      </nav>
-    </header>
 
-  );
-};
+      </header>
 
-export default Nav;
+    </>
+
+  )
+}
+
+export default Nav

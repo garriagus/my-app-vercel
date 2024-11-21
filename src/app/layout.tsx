@@ -62,12 +62,13 @@ export default function RootLayout({
 }) {
 
   return (
+
     <html
       lang={siteMetadata.language}
       className={GeistSans.className}
       suppressHydrationWarning
     >
-      <body className="mx-auto max-w-4xl px-4 sm:px-16 xl:max-w-5xl xl:px-0 ">
+      <body className=" ">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -75,10 +76,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NavBar authComponent={!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />} />
-          <main >
-            {children}
-          </main>
-          <div className="mb-3 flex space-x-4 rounded">
+          {children}
             <SocialIcon
               kind="mail"
               href={`mailto:${siteMetadata.email}`}
@@ -89,7 +87,6 @@ export default function RootLayout({
             <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
             <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
             <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
-          </div>
         </ThemeProvider>
       </body>
 

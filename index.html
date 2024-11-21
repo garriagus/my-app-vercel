@@ -1,938 +1,697 @@
-<article>
-    <a href="https://codepen.io/Andrew__Alva" title="Shader by Andrew__Alva" id="andrew-bits" target="_blank">Shader by @Andrew__Alva</a>
-<header>
-    <style>
-        :root {
-	--background: #f5b726;
-	--color: #ff2129;
-	--accent: #D9D9D9;
-	--font-family: 'Barlow', sans-serif;
-}
+<!doctype html>
+<html lang="en">
 
-@font-face {
-	font-family: "Barlow";
-	src: url("https://res.cloudinary.com/dsvsyrtoz/raw/upload/v1718846713/barlow_a5qh9p.woff2") format("woff2-variations");
-	font-stretch: 300% 500%;
-	font-weight: 22 188;
-	font-style: normal;
-}
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>FairRate</title>
+	<link href="./src/app/globals.css" rel="stylesheet">
+</head>
 
-html,
-*:before,
-*:after {
-	box-sizing: border-box;
-}
+<body class="antialiased font-sans">
 
-html * {
-	box-sizing: inherit;
-}
+	<nav class="bg-transparent py-4 px-4 lg:px-16 xl:py-8 fixed top-0 z-50 w-full md:px-8 xl:px-24 xxl:px-40"
+		id="navbar">
+		<div class="flex items-center justify-between flex-wrap relative">
+			<div class="w-1/2 md:w-1/4">
+				<a href="#">
+					<svg xmlns="http://www.w3.org/2000/svg" width="188" height="39" viewBox="0 0 188 39">
+						<g transform="translate(-193 -27)"><text transform="translate(280 56)" fill="#454f5b"
+								font-size="24" font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="0" y="0">FairRate</tspan>
+							</text>
+							<g transform="translate(193 27)">
+								<path d="M54,33H0L27,0,54,33ZM23,16V27h8V16H23Z" transform="translate(0 6)"
+									fill="#4ad5f6" />
+								<path d="M14,0,0,16H27L14,0" transform="translate(40)" fill="#95cdb1" />
+								<path d="M14,0,0,16H27L14,0" transform="translate(55 18)" fill="#ffc48b" />
+							</g>
+						</g>
+					</svg>
+				</a>
+			</div>
 
-body {
-	font-family: 'Barlow';
-	text-rendering: optimizeSpeed;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	font-variation-settings: "wght"100, "wdth"300;
-	transition: background-color 230ms ease-in-out;
-	font-size: 16px;
-}
+			<div class="w-1/2 text-right sm:hidden">
+				<button type="button" class="navbar-toggler">
+					<span class="navbar-toggler-bar"></span>
+					<span class="navbar-toggler-bar"></span>
+					<span class="navbar-toggler-bar"></span>
+				</button>
+			</div>
 
-header p {
-	font-size: 28px;
-	font-variation-settings: "wght"88, "wdth"500;
-	display: flex;
-	margin: 0;
-	justify-content: center;
-	text-transform: uppercase;
-}
+			<div class="w-full navigation-menu hidden md:flex md:w-3/4 relative">
+				<div class="flex flex-col md:flex-row pt-8 pb-2 md:pt-0 md:pb-0 md:ml-auto md:items-center relative">
+					<a href="#" class="font-semibold hover:text-gray-600">Rates</a>
+					<a href="#"
+						class="block mt-4 font-semibold max-w-3xl hidden md:ml-6 lg:inline hover:text-gray-600 md:mt-0">About
+						Us</a>
+					<a href="#"
+						class="block mt-3 font-semibold md:ml-6 hover:text-gray-600 md:mt-0 menu_item">Resources</a>
+					<a href="#" class="block mt-3 font-semibold md:ml-6 hover:text-gray-600 md:mt-0">FAQs</a>
+					<a href="#"
+						class="block mt-3 bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded text-white font-semibold md:ml-6 md:mt-0">Get
+						Started</a>
+				</div>
+			</div>
+		</div>
+	</nav>
 
-header p span {
-	text-transform: none;
-	font-size: 1.1em;
-}
+	<header
+		class="relative flex pt-32 pb-48 sm:pt-32 sm:pb-64 lg:pb-48 px-4 bg-blue-100 w-full md:pb-40 lg:px-16 lg:pt-48 xl:pt-40 xl:pb-64 xl:h-screen md:px-8 xl:px-24 xxl:px-40">
+		<div class="text-center md:text-left md:w-1/2 z-10 xxl:max-w-2xl">
+			<h1 class="text-3xl xl:text-5xl text-gray-900 font-bold leading-tight">Fair Rate lets you find the fairrest
+				rate
+			</h1>
+			<p class="text-base xl:text-xl text-gray-600 mt-4">Fusce dapibus, tellus ac cursus commodo, tortor mauris
+				condimentum nibh, ut fermentum massa justo sit amet risus.
+			</p>
 
-canvas {
-	position: absolute;
-	left: 0;
-	top: 0;
-	pointer-events: none;
-}
+			<p class="text-sm xl:text-base text-gray-600 mt-8">There are countless services with different rates %</p>
+			<a href="#"
+				class="bg-blue-500 hover:bg-blue-700 px-6 py-4 text-white rounded block sm:inline-block mt-4 text-center font-bold">Find
+				the
+				Fair
+				Rate</a>
+		</div>
 
-/* links */
+		<div class="w-full absolute bottom-0 right-0">
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+				viewBox="0 0 1161.727 456.805">
+				<defs>
+					<clipPath id="a">
+						<path
+							d="M847.9,82.732c-35.467,16.382-70.248,7.339-114.45-22.181-130.3-87.026-222.523-75.217-343.934,3.359-25.868,16.742-67.626,44.576-137.624,24.769C149.45,59.69,44.091,89,0,169.643H1161.727c-33.066-63-156.751-159.454-313.828-86.911"
+							transform="translate(0.044 0.729)" fill="none" />
+					</clipPath>
+					<linearGradient id="b" x1="0.966" y1="1.217" x2="0.09" y2="0.335" gradientUnits="objectBoundingBox">
+						<stop offset="0" stop-color="#1c8eb8" />
+						<stop offset="1" stop-color="#c5f9ff" />
+					</linearGradient>
+					<clipPath id="c">
+						<path
+							d="M0,93.453c5.066-9.4,30.388-27.88,62.525-22.872,35.079,5.468,42.787-6.458,57.249-11.417,26.478-9.079,46.914,20.875,56.065,1.869,11.685-24.264,30.654-36.258,88.5-12.391,13.739,5.669,12.8-6.891,19.051-14.225,12.145-14.242,26.853,12.047,33.6,10.6,7.663-1.639,5.324-12.829,9.811-22.411,9.349-19.964,25.484-1.2,36.607-2.849,11.075-1.639,17-23.612,29.543-19.169C419.738,10.08,411.33,65.861,409.673,78.3c7.619-10.618,21.033-18.416,21.033,15.149H0"
+							transform="translate(0.189 0.248)" fill="none" />
+					</clipPath>
+					<linearGradient id="d" x1="0.597" y1="1.079" x2="0.333" y2="-0.021"
+						gradientUnits="objectBoundingBox">
+						<stop offset="0" stop-color="#0b5c79" />
+						<stop offset="1" stop-color="#3ec3d1" />
+					</linearGradient>
+					<clipPath id="e">
+						<path
+							d="M1.971,52.2H131.918c6.753-26.83-19.77-13.415-19.77-13.415s10-28.222-.249-25.291C102,16.319,97.665,38.3,97.665,38.3S92.334,2.4,80.645.048c-7.588-1.528-1.633,34.134-1.633,34.134a18.746,18.746,0,0,0-10.92-3.908c-5.413-.082-4.1,6.882-4.1,6.882S52.7,14,46.819,14.3c-7.373.377.534,24.7.534,24.7S32.835,23.19,27.116,23.6c-7.948.575,5.909,23.161,5.909,23.161S22.5,40.429,9.967,41.475c-9.039.754-12.508,4.406-8,10.721"
+							transform="translate(0.768 0.085)" fill="none" />
+					</clipPath>
+					<linearGradient id="f" x1="0.978" y1="1.271" x2="0.312" y2="0.481"
+						gradientUnits="objectBoundingBox">
+						<stop offset="0" stop-color="#3ec3d1" />
+						<stop offset="1" stop-color="#6ce2ef" />
+					</linearGradient>
+					<clipPath id="g">
+						<path
+							d="M73.318,101.431c0,55.832-22.176,101.494-37.552,101.494S0,141.97,0,86.139,24.9-5.692,42.794.742C62.964,7.99,73.318,45.6,73.318,101.431"
+							transform="translate(0.783 0.13)" fill="none" />
+					</clipPath>
+					<linearGradient id="h" x1="1.071" y1="0.925" x2="-0.013" y2="0.054"
+						gradientUnits="objectBoundingBox">
+						<stop offset="0" stop-color="#0a6373" />
+						<stop offset="1" stop-color="#3ed1d1" />
+					</linearGradient>
+					<clipPath id="i">
+						<path d="M118.71,200.784H0V81.857L59.353,0,118.71,81.857V200.784"
+							transform="translate(0.112 0.432)" fill="none" />
+					</clipPath>
+					<linearGradient id="j" x1="0.021" y1="0.181" x2="0.787" y2="1.017"
+						gradientUnits="objectBoundingBox">
+						<stop offset="0" stop-color="#fff" />
+						<stop offset="1" stop-color="#ffe8b8" />
+					</linearGradient>
+					<clipPath id="k">
+						<path d="M0,0H136.265V97.169H0Z" transform="translate(0.466 0.057)" fill="none" />
+					</clipPath>
+					<linearGradient id="l" x1="-0.238" y1="-0.291" x2="0.984" y2="1.019" xlink:href="#j" />
+					<linearGradient id="m" x1="0.332" y1="1.492" x2="0.59" y2="-0.032"
+						gradientUnits="objectBoundingBox">
+						<stop offset="0" stop-color="#f7ce8f" />
+						<stop offset="1" stop-color="#d97d61" />
+					</linearGradient>
+					<clipPath id="n">
+						<path d="M0,0H140L199.35,81.857H59.356L0,0" transform="translate(0.53 0.432)" fill="none" />
+					</clipPath>
+					<linearGradient id="o" x1="0.447" y1="1.169" x2="0.574" y2="-0.426"
+						gradientUnits="objectBoundingBox">
+						<stop offset="0" stop-color="#d95e36" />
+						<stop offset="1" stop-color="#80331a" />
+					</linearGradient>
+					<clipPath id="p">
+						<path d="M38.59,0H0L38.59,56.221V0" transform="translate(0.695 0.511)" fill="none" />
+					</clipPath>
+					<linearGradient id="q" x1="0.194" y1="-0.251" x2="0.857" y2="0.366" xlink:href="#j" />
+					<clipPath id="r">
+						<path
+							d="M144.375,47.135a24.824,24.824,0,0,0-17.241-10.894c-13.188-1.929-8.662-16.557-20.124-20.429C94.923,11.729,93.9,21.465,62.993,3.911,54.352-1,38.325-2.537,31.209,6.789c-4.165,5.459-5.185,13.4-3.962,20.007,1.176,6.361,5.929,15.542.764,21.258-4.9,5.429-13.531,3.711-19.505,7.158C2.437,58.713.1,65.791.005,72.458-.211,88.03,6.458,104.819,16.336,116.7c20.586,24.76,57.68,30.68,86.972,20.016a69.006,69.006,0,0,0,38.756-35.741c7.523-15.806,12.109-37.988,2.312-53.841"
+							transform="translate(0.59 0.445)" fill="none" />
+					</clipPath>
+					<linearGradient id="s" x1="0.698" y1="0.98" x2="0.324" y2="0.098" xlink:href="#h" />
+					<clipPath id="t">
+						<path
+							d="M98.471,14.737c-6.526.309-13.327,1.763-35.485-10.831C54.35-1,38.325-2.536,31.2,6.79c-4.159,5.459-5.183,13.4-3.957,20.007,1.173,6.356,5.929,15.542.757,21.258-4.9,5.426-13.531,3.707-19.5,7.157C2.436,58.715.09,65.787.005,72.452c-.224,15.575,6.45,32.367,16.323,44.245.949,1.143,1.93,2.244,2.954,3.3,37.179,20.264,10.257-41.52,22.667-52.737,7.859-7.1,23.223,2.959,30.186-2.029,3.475-2.489,3.2-7.414.49-11.163C64.266,42.521,50.832,30.226,57.475,23.24c3.55-3.738,10.62-1.688,23.937-1.644,15.386.043,23.318-3.931,17.06-6.858"
+							transform="translate(0.594 0.446)" fill="none" />
+					</clipPath>
+					<linearGradient id="u" x1="0.731" y1="0.821" x2="0.286" y2="0.046" xlink:href="#f" />
+					<clipPath id="v">
+						<path
+							d="M227.289,45.589c-3.879-9.4-23.249-27.88-47.826-22.872-26.838,5.468-32.731-6.458-43.8-11.417-20.249-9.079-30.224,13.446-42.882,1.869C75.1-3,60.783-4.644,49.365,10.252,32.951,31.672,6.043,7.953,0,45.589H227.289"
+							transform="translate(0.194 0.524)" fill="none" />
+					</clipPath>
+					<linearGradient id="w" x1="0.501" y1="1.161" x2="0.484" y2="-0.939" xlink:href="#d" />
+					<clipPath id="x">
+						<path
+							d="M102.381,47.328H0C.581,15.94,8.823,36.09,8.823,36.09s2.709-22.938,8.7-23.868c5.656-.879,8.321,22.5,8.321,22.5S31.992,1.318,40.129.029C47.272-1.1,41.66,30.99,41.66,30.99a19.212,19.212,0,0,1,10.2-3.545c6.694-.275,3.958,6.242,3.958,6.242s8.365-14.511,13.863-14.238c6.888.342,2.146,15.052,2.146,15.052s5.067-4.844,10.38-5.527c10.4-1.335-.642,11.992-.642,11.992s7.38-3.026,20.1-4.949c12.412-1.878,9.834,5.218.713,11.312"
+							transform="translate(0.211 0.547)" fill="none" />
+					</clipPath>
+					<linearGradient id="y" x1="-0.027" y1="1.092" x2="0.759" y2="0.401" xlink:href="#f" />
+					<clipPath id="z">
+						<path
+							d="M139.761,35.129c.308-18.657-16.264-24.525-32.335-19.316-12.157,3.94-13.142,5.652-43.929-11.9C54.894-1,38.876-2.537,31.689,6.789c-4.2,5.459-5.278,13.4-4.108,20.007,1.135,6.361,5.823,15.542.616,21.258-4.944,5.429-13.564,3.711-19.563,7.158-6.1,3.5-8.48,10.58-8.62,17.246C-.321,88.03,5.573,105.394,16.023,116.7c21.059,22.8,58.082,31.61,92.291,22.889,75.429-19.227,47.061-59.827,38.22-70.59-9.518-11.573-6.984-21.007-6.773-33.871"
+							transform="translate(0.69 0.445)" fill="none" />
+					</clipPath>
+					<linearGradient id="aa" x1="0.737" y1="0.976" x2="0.277" y2="0.117" xlink:href="#h" />
+					<clipPath id="ab">
+						<path
+							d="M108.365,15.538c-.308.086-.625.182-.932.278C95.276,19.747,94.291,21.467,63.5,3.906,54.892-1,38.883-2.536,31.7,6.79c-4.213,5.459-5.3,13.4-4.117,20.007,1.135,6.356,5.814,15.542.616,21.258C23.26,53.481,14.649,51.762,8.65,55.212c-6.1,3.5-8.488,10.575-8.638,17.24C-.314,88.027,6.231,104.819,16.03,116.7a59.878,59.878,0,0,0,4.082,4.487c33.778,20.563-1.346-23.852,26.539-42.194,13.784-9.08,40.393-18.619,28.808-33.07C67,35.354,60.575,31.241,63.161,25.431,64.577,22.225,68.72,19.213,81.8,21.6c17.892,3.269,30.954-3.087,26.565-6.057"
+							transform="translate(0.683 0.446)" fill="none" />
+					</clipPath>
+					<linearGradient id="ac" x1="0.736" y1="0.722" x2="0.264" y2="0.157" xlink:href="#f" />
+					<filter id="ad" x="830.456" y="132.5" width="90" height="90" filterUnits="userSpaceOnUse">
+						<feOffset dy="5" input="SourceAlpha" />
+						<feGaussianBlur stdDeviation="3.5" result="ae" />
+						<feFlood flood-color="#a4a4a4" flood-opacity="0.216" />
+						<feComposite operator="in" in2="ae" />
+						<feComposite in="SourceGraphic" />
+					</filter>
+					<filter id="af" x="615.956" y="118" width="101" height="101" filterUnits="userSpaceOnUse">
+						<feOffset dy="6" input="SourceAlpha" />
+						<feGaussianBlur stdDeviation="4" result="ag" />
+						<feFlood flood-color="#a4a4a4" flood-opacity="0.216" />
+						<feComposite operator="in" in2="ag" />
+						<feComposite in="SourceGraphic" />
+					</filter>
+					<filter id="ah" x="659.956" y="27" width="71.9" height="71.9" filterUnits="userSpaceOnUse">
+						<feOffset dy="4" input="SourceAlpha" />
+						<feGaussianBlur stdDeviation="3" result="ai" />
+						<feFlood flood-color="#a4a4a4" flood-opacity="0.216" />
+						<feComposite operator="in" in2="ai" />
+						<feComposite in="SourceGraphic" />
+					</filter>
+					<filter id="aj" x="720.956" y="73" width="80.37" height="80.37" filterUnits="userSpaceOnUse">
+						<feOffset dy="4" input="SourceAlpha" />
+						<feGaussianBlur stdDeviation="3" result="ak" />
+						<feFlood flood-color="#a4a4a4" flood-opacity="0.216" />
+						<feComposite operator="in" in2="ak" />
+						<feComposite in="SourceGraphic" />
+					</filter>
+					<filter id="al" x="818.956" y="47" width="80.37" height="80.37" filterUnits="userSpaceOnUse">
+						<feOffset dy="4" input="SourceAlpha" />
+						<feGaussianBlur stdDeviation="3" result="am" />
+						<feFlood flood-color="#a4a4a4" flood-opacity="0.216" />
+						<feComposite operator="in" in2="am" />
+						<feComposite in="SourceGraphic" />
+					</filter>
+					<filter id="an" x="781.956" y="0" width="72" height="72" filterUnits="userSpaceOnUse">
+						<feOffset dy="4" input="SourceAlpha" />
+						<feGaussianBlur stdDeviation="3" result="ao" />
+						<feFlood flood-color="#a4a4a4" flood-opacity="0.216" />
+						<feComposite operator="in" in2="ao" />
+						<feComposite in="SourceGraphic" />
+					</filter>
+				</defs>
+				<g transform="translate(1950.456 5248.5)">
+					<rect width="1" height="225" transform="translate(-1285.5 -5047.5)" fill="#dfe3e8" />
+					<rect width="1" height="225" transform="translate(-1255.5 -5167.5)" fill="#dfe3e8" opacity="0.5" />
+					<rect width="1" height="225" transform="translate(-1189.5 -5112.5)" fill="#dfe3e8" />
+					<rect width="1" height="225" transform="translate(-1091.5 -5138.5)" fill="#dfe3e8" opacity="0.5" />
+					<rect width="1" height="225" transform="translate(-1075.5 -5040.5)" fill="#dfe3e8" />
+					<rect width="1" height="225" transform="translate(-1132.5 -5189.5)" fill="#dfe3e8" />
+					<g transform="translate(-1950.5 -4962.067)">
+						<path
+							d="M847.9,82.732c-35.467,16.382-70.248,7.339-114.45-22.181-130.3-87.026-222.523-75.217-343.934,3.359-25.868,16.742-67.626,44.576-137.624,24.769C149.45,59.69,44.091,89,0,169.643H1161.727c-33.066-63-156.751-159.454-313.828-86.911"
+							transform="translate(0.044 0.729)" fill="none" />
+						<g clip-path="url(#a)">
+							<path
+								d="M847.9,82.732c-35.467,16.382-70.248,7.339-114.45-22.181-130.3-87.026-222.523-75.217-343.934,3.359-25.868,16.742-67.626,44.576-137.624,24.769C149.45,59.69,44.091,89,0,169.643H1161.727c-33.066-63-156.751-159.454-313.828-86.911"
+								transform="translate(0.044 0.729)" fill="url(#b)" />
+						</g>
+					</g>
+					<g transform="translate(-1714.757 -4885.397)">
+						<path
+							d="M0,93.453c5.066-9.4,30.388-27.88,62.525-22.872,35.079,5.468,42.787-6.458,57.249-11.417,26.478-9.079,46.914,20.875,56.065,1.869,11.685-24.264,30.654-36.258,88.5-12.391,13.739,5.669,12.8-6.891,19.051-14.225,12.145-14.242,26.853,12.047,33.6,10.6,7.663-1.639,5.324-12.829,9.811-22.411,9.349-19.964,25.484-1.2,36.607-2.849,11.075-1.639,17-23.612,29.543-19.169C419.738,10.08,411.33,65.861,409.673,78.3c7.619-10.618,21.033-18.416,21.033,15.149H0"
+							transform="translate(0.189 0.248)" fill="none" />
+						<g clip-path="url(#c)">
+							<path
+								d="M0,93.453c5.066-9.4,30.388-27.88,62.525-22.872,35.079,5.468,42.787-6.458,57.249-11.417,26.478-9.079,46.914,20.875,56.065,1.869,11.685-24.264,30.654-36.258,88.5-12.391,13.739,5.669,12.8-6.891,19.051-14.225,12.145-14.242,26.853,12.047,33.6,10.6,7.663-1.639,5.324-12.829,9.811-22.411,9.349-19.964,25.484-1.2,36.607-2.849,11.075-1.639,17-23.612,29.543-19.169C419.738,10.08,411.33,65.861,409.673,78.3c7.619-10.618,21.033-18.416,21.033,15.149H0"
+								transform="translate(0.189 0.248)" fill="url(#d)" />
+						</g>
+					</g>
+					<g transform="translate(-1597.766 -4843.978)">
+						<path
+							d="M1.971,52.2H131.918c6.753-26.83-19.77-13.415-19.77-13.415s10-28.222-.249-25.291C102,16.319,97.665,38.3,97.665,38.3S92.334,2.4,80.645.048c-7.588-1.528-1.633,34.134-1.633,34.134a18.746,18.746,0,0,0-10.92-3.908c-5.413-.082-4.1,6.882-4.1,6.882S52.7,14,46.819,14.3c-7.373.377.534,24.7.534,24.7S32.835,23.19,27.116,23.6c-7.948.575,5.909,23.161,5.909,23.161S22.5,40.429,9.967,41.475c-9.039.754-12.508,4.406-8,10.721"
+							transform="translate(0.768 0.085)" fill="none" />
+						<g clip-path="url(#e)">
+							<path
+								d="M1.971,52.2H131.918c6.753-26.83-19.77-13.415-19.77-13.415s10-28.222-.249-25.291C102,16.319,97.665,38.3,97.665,38.3S92.334,2.4,80.645.048c-7.588-1.528-1.633,34.134-1.633,34.134a18.746,18.746,0,0,0-10.92-3.908c-5.413-.082-4.1,6.882-4.1,6.882S52.7,14,46.819,14.3c-7.373.377.534,24.7.534,24.7S32.835,23.19,27.116,23.6c-7.948.575,5.909,23.161,5.909,23.161S22.5,40.429,9.967,41.475c-9.039.754-12.508,4.406-8,10.721"
+								transform="translate(0.768 0.085)" fill="url(#f)" />
+						</g>
+					</g>
+					<g transform="translate(-1022.483 -5040.5)">
+						<path
+							d="M73.318,101.431c0,55.832-22.176,101.494-37.552,101.494S0,141.97,0,86.139,24.9-5.692,42.794.742C62.964,7.99,73.318,45.6,73.318,101.431"
+							transform="translate(0.783 0.13)" fill="none" />
+						<g clip-path="url(#g)">
+							<path
+								d="M73.318,101.431c0,55.832-22.176,101.494-37.552,101.494S0,141.97,0,86.139,24.9-5.692,42.794.742C62.964,7.99,73.318,45.6,73.318,101.431"
+								transform="translate(0.783 0.13)" fill="url(#h)" />
+						</g>
+					</g>
+					<g transform="translate(-1316.282 -4992.912)">
+						<path d="M118.71,200.784H0V81.857L59.353,0,118.71,81.857V200.784"
+							transform="translate(0.112 0.432)" fill="none" />
+						<g clip-path="url(#i)">
+							<path d="M118.71,200.784H0V81.857L59.353,0,118.71,81.857V200.784"
+								transform="translate(0.112 0.432)" fill="url(#j)" />
+						</g>
+					</g>
+					<path d="M0,118.927H139.994V0H0Z" transform="translate(-1197.461 -4910.623)" fill="#f7ce8f" />
+					<g transform="translate(-1175.54 -4888.922)">
+						<path d="M0,0H136.265V97.169H0Z" transform="translate(0.466 0.057)" fill="none" />
+						<g clip-path="url(#k)">
+							<path d="M0,97.169H136.265V0H0Z" transform="translate(0.466 0.057)" fill="url(#l)" />
+						</g>
+					</g>
+					<path d="M0,97.169H139.994V0H0Z" transform="translate(-1038.809 -4888.865)" fill="url(#m)" />
+					<path d="M0,75.272H98.95V0H0Z" transform="translate(-1156.417 -4866.967)" fill="#9d9d9c" />
+					<g transform="translate(-1257.346 -4992.912)">
+						<path d="M0,0H140L199.35,81.857H59.356L0,0" transform="translate(0.53 0.432)" fill="none" />
+						<g clip-path="url(#n)">
+							<path d="M0,0H140L199.35,81.857H59.356L0,0" transform="translate(0.53 0.432)"
+								fill="url(#o)" />
+						</g>
+					</g>
+					<path d="M0,75.272H5.779V0H0Z" transform="translate(-1156.417 -4866.967)" fill="#f7ce8f" />
+					<path d="M0,1.648H93.171V0H0Z" transform="translate(-1150.638 -4866.967)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4860.832)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4854.696)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4848.561)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4842.426)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4836.29)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4830.155)" fill="#415680" />
+					<path d="M0,1.646H93.171V0H0Z" transform="translate(-1150.638 -4824.019)" fill="#415680" />
+					<path d="M0,1.646H93.171V0H0Z" transform="translate(-1150.638 -4817.883)" fill="#415680" />
+					<path d="M0,1.646H93.171V0H0Z" transform="translate(-1150.638 -4811.748)" fill="#415680" />
+					<path d="M0,1.646H93.171V0H0Z" transform="translate(-1150.638 -4805.612)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4799.478)" fill="#415680" />
+					<path d="M0,1.647H93.171V0H0Z" transform="translate(-1150.638 -4793.343)" fill="#415680" />
+					<path d="M0,75.271H24.968V0H0Z" transform="translate(-1291.092 -4888.865)" fill="#2e3e5c" />
+					<path d="M0,75.271H5.776V0H0Z" transform="translate(-1291.092 -4888.865)" fill="#f7ce8f" />
+					<path d="M0,97.169H24.97V0H0Z" transform="translate(-1247.509 -4888.865)" fill="#2e3e5c" />
+					<path d="M0,97.169H5.775V0H0Z" transform="translate(-1247.509 -4888.865)" fill="#f7ce8f" />
+					<path d="M0,56.221H42.2V0H0Z" transform="translate(-1148.57 -4966.844)" fill="#f7ce8f" />
+					<path d="M0,40.527H24.964V0H0Z" transform="translate(-1139.95 -4951.149)" fill="#2e3e5c" />
+					<path d="M0,40.527H5.858V0H0Z" transform="translate(-1120.844 -4951.149)" fill="#fff" />
+					<g transform="translate(-1187.855 -4967.355)">
+						<path d="M38.59,0H0L38.59,56.221V0" transform="translate(0.695 0.511)" fill="none" />
+						<g clip-path="url(#p)">
+							<path d="M38.59,0H0L38.59,56.221V0" transform="translate(0.695 0.511)" fill="url(#q)" />
+						</g>
+					</g>
+					<path d="M0,62.922H13.6V0H0Z" transform="translate(-1279.725 -4876.517)" fill="#36a9e1" />
+					<path d="M0,84.821H13.608V0H0Z" transform="translate(-1236.147 -4876.517)" fill="#36a9e1" />
+					<path d="M0,3.294H19.2V0H0Z" transform="translate(-1241.735 -4866.967)" fill="#fff" />
+					<path d="M0,3.294H19.192V0H0Z" transform="translate(-1285.316 -4866.967)" fill="#fff" />
+					<path d="M0,28.179H13.6V0H0Z" transform="translate(-1134.443 -4938.802)" fill="#36a9e1" />
+					<path d="M2.468,26.83H0V0H3.938L2.468,26.83" transform="translate(-1382.756 -4818.526)"
+						fill="#fff" />
+					<path d="M6.6,26.83H4.261L0,0H3.939L6.6,26.83" transform="translate(-1371.965 -4818.526)"
+						fill="#fff" />
+					<path d="M6.646,0H4.582L0,22.966H3.939L6.646,0" transform="translate(-1371.965 -4841.492)"
+						fill="#fff" />
+					<path d="M0,4.985H14.73V0H0Z" transform="translate(-1382.756 -4818.526)" fill="#fff" />
+					<path d="M0,4.985H10.791V0H0Z" transform="translate(-1375.248 -4818.526)" fill="#fff" />
+					<path d="M2.468,26.83H0V0H3.937L2.468,26.83" transform="translate(-1446.35 -4818.526)"
+						fill="#fff" />
+					<path d="M6.6,26.83H4.26L0,0H3.938L6.6,26.83" transform="translate(-1435.559 -4818.526)"
+						fill="#fff" />
+					<path d="M6.646,0H4.582L0,22.966H3.938L6.646,0" transform="translate(-1435.559 -4841.492)"
+						fill="#fff" />
+					<path d="M0,4.985H14.73V0H0Z" transform="translate(-1446.35 -4818.526)" fill="#fff" />
+					<path d="M0,4.985H76.547V0H0Z" transform="translate(-1451.794 -4818.526)" fill="#fff" />
+					<path d="M0,4.985H76.546L77.449,0H.9L0,4.985" transform="translate(-1438.57 -4841.492)"
+						fill="#fff" />
+					<path d="M0,4.986H76.547L77.45,0H.9L0,4.986" transform="translate(-1439.958 -4833.837)"
+						fill="#fff" />
+					<g transform="translate(-1549.386 -5002.605)">
+						<path
+							d="M144.375,47.135a24.824,24.824,0,0,0-17.241-10.894c-13.188-1.929-8.662-16.557-20.124-20.429C94.923,11.729,93.9,21.465,62.993,3.911,54.352-1,38.325-2.537,31.209,6.789c-4.165,5.459-5.185,13.4-3.962,20.007,1.176,6.361,5.929,15.542.764,21.258-4.9,5.429-13.531,3.711-19.505,7.158C2.437,58.713.1,65.791.005,72.458-.211,88.03,6.458,104.819,16.336,116.7c20.586,24.76,57.68,30.68,86.972,20.016a69.006,69.006,0,0,0,38.756-35.741c7.523-15.806,12.109-37.988,2.312-53.841"
+							transform="translate(0.59 0.445)" fill="none" />
+						<g clip-path="url(#r)">
+							<path
+								d="M144.375,47.135a24.824,24.824,0,0,0-17.241-10.894c-13.188-1.929-8.662-16.557-20.124-20.429C94.923,11.729,93.9,21.465,62.993,3.911,54.352-1,38.325-2.537,31.209,6.789c-4.165,5.459-5.185,13.4-3.962,20.007,1.176,6.361,5.929,15.542.764,21.258-4.9,5.429-13.531,3.711-19.505,7.158C2.437,58.713.1,65.791.005,72.458-.211,88.03,6.458,104.819,16.336,116.7c20.586,24.76,57.68,30.68,86.972,20.016a69.006,69.006,0,0,0,38.756-35.741c7.523-15.806,12.109-37.988,2.312-53.841"
+								transform="translate(0.59 0.445)" fill="url(#s)" />
+						</g>
+					</g>
+					<g transform="translate(-1549.386 -5002.605)">
+						<path
+							d="M98.471,14.737c-6.526.309-13.327,1.763-35.485-10.831C54.35-1,38.325-2.536,31.2,6.79c-4.159,5.459-5.183,13.4-3.957,20.007,1.173,6.356,5.929,15.542.757,21.258-4.9,5.426-13.531,3.707-19.5,7.157C2.436,58.715.09,65.787.005,72.452c-.224,15.575,6.45,32.367,16.323,44.245.949,1.143,1.93,2.244,2.954,3.3,37.179,20.264,10.257-41.52,22.667-52.737,7.859-7.1,23.223,2.959,30.186-2.029,3.475-2.489,3.2-7.414.49-11.163C64.266,42.521,50.832,30.226,57.475,23.24c3.55-3.738,10.62-1.688,23.937-1.644,15.386.043,23.318-3.931,17.06-6.858"
+							transform="translate(0.594 0.446)" fill="none" />
+						<g clip-path="url(#t)">
+							<path
+								d="M98.471,14.737c-6.526.309-13.327,1.763-35.485-10.831C54.35-1,38.325-2.536,31.2,6.79c-4.159,5.459-5.183,13.4-3.957,20.007,1.173,6.356,5.929,15.542.757,21.258-4.9,5.426-13.531,3.707-19.5,7.157C2.436,58.715.09,65.787.005,72.452c-.224,15.575,6.45,32.367,16.323,44.245.949,1.143,1.93,2.244,2.954,3.3,37.179,20.264,10.257-41.52,22.667-52.737,7.859-7.1,23.223,2.959,30.186-2.029,3.475-2.489,3.2-7.414.49-11.163C64.266,42.521,50.832,30.226,57.475,23.24c3.55-3.738,10.62-1.688,23.937-1.644,15.386.043,23.318-3.931,17.06-6.858"
+								transform="translate(0.594 0.446)" fill="url(#u)" />
+						</g>
+					</g>
+					<path
+						d="M16.281,130.828H8.658l-.308-50.2L0,2.537,2,0,12.881,76.209,20.63,26.051,22.5,28,14.883,85.055l1.4,45.773"
+						transform="translate(-1483.255 -4922.524)" fill="#2e3e5c" />
+					<path d="M17.77,1.035,0,27.295V25.132L16.76,0,17.77,1.035"
+						transform="translate(-1464.931 -4901.648)" fill="#2e3e5c" />
+					<path d="M15.139,21.486,0,.947.837,0l14.62,18.961-.318,2.525"
+						transform="translate(-1493.268 -4901.648)" fill="#2e3e5c" />
+					<path d="M5.462.31,1,25,0,22.565,4.443,0,5.462.31" transform="translate(-1479.856 -4924.213)"
+						fill="#2e3e5c" />
+					<g transform="translate(-1027.761 -4837.809)">
+						<path
+							d="M227.289,45.589c-3.879-9.4-23.249-27.88-47.826-22.872-26.838,5.468-32.731-6.458-43.8-11.417-20.249-9.079-30.224,13.446-42.882,1.869C75.1-3,60.783-4.644,49.365,10.252,32.951,31.672,6.043,7.953,0,45.589H227.289"
+							transform="translate(0.194 0.524)" fill="none" />
+						<g clip-path="url(#v)">
+							<path
+								d="M227.289,45.589c-3.879-9.4-23.249-27.88-47.826-22.872-26.838,5.468-32.731-6.458-43.8-11.417-20.249-9.079-30.224,13.446-42.882,1.869C75.1-3,60.783-4.644,49.365,10.252,32.951,31.672,6.043,7.953,0,45.589H227.289"
+								transform="translate(0.194 0.524)" fill="url(#w)" />
+						</g>
+					</g>
+					<g transform="translate(-948.594 -4839.571)">
+						<path
+							d="M102.381,47.328H0C.581,15.94,8.823,36.09,8.823,36.09s2.709-22.938,8.7-23.868c5.656-.879,8.321,22.5,8.321,22.5S31.992,1.318,40.129.029C47.272-1.1,41.66,30.99,41.66,30.99a19.212,19.212,0,0,1,10.2-3.545c6.694-.275,3.958,6.242,3.958,6.242s8.365-14.511,13.863-14.238c6.888.342,2.146,15.052,2.146,15.052s5.067-4.844,10.38-5.527c10.4-1.335-.642,11.992-.642,11.992s7.38-3.026,20.1-4.949c12.412-1.878,9.834,5.218.713,11.312"
+							transform="translate(0.211 0.547)" fill="none" />
+						<g clip-path="url(#x)">
+							<path
+								d="M102.381,47.328H0C.581,15.94,8.823,36.09,8.823,36.09s2.709-22.938,8.7-23.868c5.656-.879,8.321,22.5,8.321,22.5S31.992,1.318,40.129.029C47.272-1.1,41.66,30.99,41.66,30.99a19.212,19.212,0,0,1,10.2-3.545c6.694-.275,3.958,6.242,3.958,6.242s8.365-14.511,13.863-14.238c6.888.342,2.146,15.052,2.146,15.052s5.067-4.844,10.38-5.527c10.4-1.335-.642,11.992-.642,11.992s7.38-3.026,20.1-4.949c12.412-1.878,9.834,5.218.713,11.312"
+								transform="translate(0.211 0.547)" fill="url(#y)" />
+						</g>
+					</g>
+					<g transform="translate(-1000.492 -5002.605)">
+						<path
+							d="M139.761,35.129c.308-18.657-16.264-24.525-32.335-19.316-12.157,3.94-13.142,5.652-43.929-11.9C54.894-1,38.876-2.537,31.689,6.789c-4.2,5.459-5.278,13.4-4.108,20.007,1.135,6.361,5.823,15.542.616,21.258-4.944,5.429-13.564,3.711-19.563,7.158-6.1,3.5-8.48,10.58-8.62,17.246C-.321,88.03,5.573,105.394,16.023,116.7c21.059,22.8,58.082,31.61,92.291,22.889,75.429-19.227,47.061-59.827,38.22-70.59-9.518-11.573-6.984-21.007-6.773-33.871"
+							transform="translate(0.69 0.445)" fill="none" />
+						<g clip-path="url(#z)">
+							<path
+								d="M139.761,35.129c.308-18.657-16.264-24.525-32.335-19.316-12.157,3.94-13.142,5.652-43.929-11.9C54.894-1,38.876-2.537,31.689,6.789c-4.2,5.459-5.278,13.4-4.108,20.007,1.135,6.361,5.823,15.542.616,21.258-4.944,5.429-13.564,3.711-19.563,7.158-6.1,3.5-8.48,10.58-8.62,17.246C-.321,88.03,5.573,105.394,16.023,116.7c21.059,22.8,58.082,31.61,92.291,22.889,75.429-19.227,47.061-59.827,38.22-70.59-9.518-11.573-6.984-21.007-6.773-33.871"
+								transform="translate(0.69 0.445)" fill="url(#aa)" />
+						</g>
+					</g>
+					<g transform="translate(-1000.492 -5002.605)">
+						<path
+							d="M108.365,15.538c-.308.086-.625.182-.932.278C95.276,19.747,94.291,21.467,63.5,3.906,54.892-1,38.883-2.536,31.7,6.79c-4.213,5.459-5.3,13.4-4.117,20.007,1.135,6.356,5.814,15.542.616,21.258C23.26,53.481,14.649,51.762,8.65,55.212c-6.1,3.5-8.488,10.575-8.638,17.24C-.314,88.027,6.231,104.819,16.03,116.7a59.878,59.878,0,0,0,4.082,4.487c33.778,20.563-1.346-23.852,26.539-42.194,13.784-9.08,40.393-18.619,28.808-33.07C67,35.354,60.575,31.241,63.161,25.431,64.577,22.225,68.72,19.213,81.8,21.6c17.892,3.269,30.954-3.087,26.565-6.057"
+							transform="translate(0.683 0.446)" fill="none" />
+						<g clip-path="url(#ab)">
+							<path
+								d="M108.365,15.538c-.308.086-.625.182-.932.278C95.276,19.747,94.291,21.467,63.5,3.906,54.892-1,38.883-2.536,31.7,6.79c-4.213,5.459-5.3,13.4-4.117,20.007,1.135,6.356,5.814,15.542.616,21.258C23.26,53.481,14.649,51.762,8.65,55.212c-6.1,3.5-8.488,10.575-8.638,17.24C-.314,88.027,6.231,104.819,16.03,116.7a59.878,59.878,0,0,0,4.082,4.487c33.778,20.563-1.346-23.852,26.539-42.194,13.784-9.08,40.393-18.619,28.808-33.07C67,35.354,60.575,31.241,63.161,25.431,64.577,22.225,68.72,19.213,81.8,21.6c17.892,3.269,30.954-3.087,26.565-6.057"
+								transform="translate(0.683 0.446)" fill="url(#ac)" />
+						</g>
+					</g>
+					<path
+						d="M10.7,134.745h7.626l-.669-50.2L19.282,2.537,17.311,0,13.159,80.126,1.882,30.889,0,32.835,11.092,88.972l-.4,45.773"
+						transform="translate(-931.265 -4926.44)" fill="#2e3e5c" />
+					<path d="M12.983,0,.026,19.36,0,23.221,14.329,1.156,12.983,0"
+						transform="translate(-913.743 -4912.463)" fill="#2e3e5c" />
+					<path d="M.862,0,6.536,11.517l-.018,2.488L0,.358.862,0" transform="translate(-920.894 -4919.823)"
+						fill="#2e3e5c" />
+					<path d="M.818,0l9.544,8.558.783,2.192L0,.6.818,0" transform="translate(-938.117 -4888.993)"
+						fill="#2e3e5c" />
+					<path d="M10.156,10.855C7.534,4.3,4.816-.493,2.6.041.409.567-.189,4.944.049,10.855H10.156"
+						transform="translate(-963.79 -4802.551)" fill="#3fc3d1" />
+					<path d="M16.3,5.433C12.456,2.927,8.365.393,4.829.033,1.188-.338.413,2.481,0,5.433H16.3"
+						transform="translate(-986.181 -4797.129)" fill="#3fc3d1" />
+					<path d="M15.007,5.28A14.817,14.817,0,0,0,5.306.032C1.663-.338-.8,2.564.241,5.28H15.007"
+						transform="translate(-1613.921 -4796.976)" fill="#6ce3f0" />
+					<g transform="translate(-1109.5 -5110.5)">
+						<g transform="matrix(1, 0, 0, 1, -840.96, -138)" filter="url(#ad)">
+							<circle cx="34.5" cy="34.5" r="34.5" transform="translate(840.96 138)" fill="#fff" />
+						</g>
+						<g transform="translate(17 19)">
+							<path d="M10,0,0,12H20L10,0" transform="translate(8)" fill="#b6eceb" /><text
+								transform="translate(18 28)" fill="#454f5b" font-size="17.28"
+								font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="-17.647" y="0">25%</tspan>
+							</text>
+						</g>
+					</g>
+					<g transform="translate(-1322.5 -5124.5)">
+						<g transform="matrix(1, 0, 0, 1, -627.96, -124)" filter="url(#af)">
+							<circle cx="38.5" cy="38.5" r="38.5" transform="translate(627.96 124)" fill="#fff" />
+						</g>
+						<g transform="translate(19 21)">
+							<path d="M11,0,0,13H22L11,0" transform="translate(9)" fill="#007ace" /><text
+								transform="translate(20 31)" fill="#454f5b" font-size="19.2"
+								font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="-19.608" y="0">30%</tspan>
+							</text>
+						</g>
+					</g>
+					<g transform="translate(-1281.5 -5216.5)" opacity="0.5">
+						<g transform="matrix(1, 0, 0, 1, -668.96, -32)" filter="url(#ah)">
+							<circle cx="26.95" cy="26.95" r="26.95" transform="translate(668.96 32)" fill="#fff" />
+						</g>
+						<g transform="translate(13.3 14.7)">
+							<path d="M7.7,0,0,9.1H15.4L7.7,0" transform="translate(6.3)" fill="#007ace" /><text
+								transform="translate(14 22.1)" fill="#454f5b" font-size="13.44"
+								font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="-13.725" y="0">12%</tspan>
+							</text>
+						</g>
+					</g>
+					<g transform="translate(-1220.5 -5170.5)">
+						<g transform="matrix(1, 0, 0, 1, -729.96, -78)" filter="url(#aj)">
+							<circle cx="31.185" cy="31.185" r="31.185" transform="translate(729.96 78)" fill="#fff" />
+						</g>
+						<g transform="translate(15.39 16.01)">
+							<path d="M9,0,0,10H17L9,0" transform="translate(7.61 0.99)" fill="#ffc48b" /><text
+								transform="translate(16.2 26.53)" fill="#454f5b" font-size="15.552"
+								font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="-15.882" y="0">18%</tspan>
+							</text>
+						</g>
+					</g>
+					<g transform="translate(-1122.5 -5196.5)" opacity="0.5">
+						<g transform="matrix(1, 0, 0, 1, -827.96, -52)" filter="url(#al)">
+							<circle cx="31.185" cy="31.185" r="31.185" transform="translate(827.96 52)" fill="#fff" />
+						</g>
+						<g transform="translate(15.39 16.01)">
+							<path d="M9,0,0,10H17L9,0" transform="translate(7.61 0.99)" fill="#ffc48b" /><text
+								transform="translate(16.2 26.53)" fill="#454f5b" font-size="15.552"
+								font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="-15.882" y="0">12%</tspan>
+							</text>
+						</g>
+					</g>
+					<g transform="translate(-1159.5 -5243.5)">
+						<g transform="matrix(1, 0, 0, 1, -790.96, -5)" filter="url(#an)">
+							<circle cx="27" cy="27" r="27" transform="translate(790.96 5)" fill="#fff" />
+						</g>
+						<g transform="translate(13 15)">
+							<path d="M8,0,0,9H15L8,0" transform="translate(6)" fill="#95cdb1" /><text
+								transform="translate(14 22)" fill="#454f5b" font-size="13.44"
+								font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="-13.725" y="0">10%</tspan>
+							</text>
+						</g>
+					</g>
+				</g>
+			</svg>
+		</div>
+	</header>
 
-a#logo {
-	position: absolute;
-	display: block;
-	left: 0;
-	top: 0;
-	background-color: transparent;
-	opacity: 1;
-	z-index: 1;
-	padding: 0;
-	margin: 1em;
-	width: max(10vw, 200px);
-}
-a#andrew-bits {
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: auto;
-	min-width: none;
-	max-width: none;
-	text-transform: uppercase;
-	text-decoration: none;
-	margin-top: 1em;
-	padding: .25em 1em;
-}
-a#work-link {
-	color: var(--color);
-	position: absolute;
-	right: 0;
-	bottom: 0;
-    background-color: transparent;
-    width: auto;
-    margin: 1em;
-    padding: 0;
-	text-align: right;
-}
+	<section class="bg-gray-100 flex flex-col text-center py-16 px-4 lg:px-16 md:px-8 xl:px-24 xxl:px-40">
+		<div>
+			<h2 class="text-xl lg:text-3xl font-bold text-gray-900">How FairRate works you ask?</h2>
+		</div>
 
-figure {
-	margin: 0;
-	padding: 0;
-	float: right;
-	font-variation-settings: "wght" 80, "wdth"400;
-}
+		<div class="mt-12 sm:flex items-start justify-between sm:-mx-2">
+			<div class="w-full bg-white rounded-lg shadow-lg py-8 px-4 sm:w-1/3 sm:mx-2 lg:mx-6">
+				<div class="h-24">
+					<img src="images/icon-home-1.svg" alt="" class="mx-auto">
+				</div>
+				<h4 class="text-md uppercase text-gray-800 font-bold mt-10">Apply with your home</h4>
+				<p class="text-base text-gray-600 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
 
-a#work-link img {
-    max-width: 200px;
-		max-height: 200px;
-    object-position: right;
-    object-fit: cover;
-    text-align: right;
-    display: inline;
-}
+			<div class="w-full bg-white rounded-lg shadow-lg py-8 px-4 mt-6 sm:mt-0 sm:w-1/3 sm:mx-2 lg:mx-6">
+				<div class="h-24">
+					<img src="images/icon-home-2.svg" alt="" class="mx-auto">
+				</div>
+				<h4 class="text-md uppercase text-gray-800 font-bold mt-10">Complete the form</h4>
+				<p class="text-base text-gray-600 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
 
-figcaption {
-	text-align: right;
-	padding-top: .5em;
-    width: 100%;
-    display: inline-block;
-}
+			<div class="w-full bg-white rounded-lg shadow-lg py-8 px-4 mt-6 sm:mt-0 sm:w-1/3 sm:mx-2 lg:mx-6">
+				<div class="h-24">
+					<img src="images/icon-home-3.svg" alt="" class="mx-auto">
+				</div>
+				<h4 class="text-md uppercase text-gray-800 font-bold mt-10">Choose the fair rate</h4>
+				<p class="text-base text-gray-600 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+		</div>
 
-svg {
-	height: auto;
-	width: 100%;
-}
-path {
-	fill: var(--color)
-}
+		<div class="mt-16 w-full sm:max-w-2xl sm:mx-auto">
+			<p class="text-md font-bold text-gray-900 lg:text-xl">“ FairRate is beautiful, elegant and easy to apply.
+				I’ve been able to apply for an amazing rate in just a minutes. Thank you very much for creating this
+				impressive service! ”</p>
+			<p class="text-blue-500 font-bold mt-4">Valeria Boltneva</p>
+			<p class="text-gray-600">Director of Adrian Stefan.Inc</p>
+		</div>
+	</section>
 
-a:hover {
-	background-color: var(--background);
-	color: var(--color);
-}
+	<section class="bg-blue-500 flex flex-col py-12 px-4 text-center lg:px-16 md:px-8 xl:px-24 xxl:px-40">
+		<div>
+			<h2 class="text-xl font-bold text-white lg:text-3xl ">Looking for the perfect rate for your home?</h2>
+		</div>
 
-a:hover {
-	transform: scale(.95);
-	opacity: .8;
-}
+		<div class="sm:flex items-center">
+			<div class="w-full mt-8 sm:w-1/2 sm:pr-12">
+				<img src="images/rates.png" alt="" class="mx-auto">
+			</div>
 
-span {
-	user-select: none;
-}
+			<div class="mt-8 sm:w-1/2 sm:text-left">
+				<h4 class="text-xl font-bold text-white">Stop Looking</h4>
+				<p class="text-base text-white mt-2">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+					nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna.</p>
 
-h1 {
-	font-variation-settings: "wght"150, "wdth"300;
-	margin: 0;
-	padding: 0;
-	font-size: max(10vw, 90px);
-}
+				<ul class="text-left mt-8">
+					<li>
+						<div class="flex items-start">
+							<div class="w-6 h-6 mr-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+									<path
+										d="M12,24A12,12,0,0,1,3.515,3.515,12,12,0,0,1,20.486,20.486,11.922,11.922,0,0,1,12,24ZM12,1A11,11,0,1,0,23,12,11.014,11.014,0,0,0,12,1ZM9.646,16.506a.8.8,0,0,1-.514-.26L5.9,13.016l1.027-1.027,2.723,2.722,7.2-7.252L17.868,8.5l-7.714,7.754A.8.8,0,0,1,9.646,16.506Z"
+										fill="#fff" />
+								</svg>
+							</div>
+							<div>
+								<p class="text-white">Integer posuere erat a ante venenatis dapibus</p>
+							</div>
+						</div>
+					</li>
+					<li class="mt-3">
+						<div class="flex items-start">
+							<div class="w-6 h-6 mr-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+									<path
+										d="M12,24A12,12,0,0,1,3.515,3.515,12,12,0,0,1,20.486,20.486,11.922,11.922,0,0,1,12,24ZM12,1A11,11,0,1,0,23,12,11.014,11.014,0,0,0,12,1ZM9.646,16.506a.8.8,0,0,1-.514-.26L5.9,13.016l1.027-1.027,2.723,2.722,7.2-7.252L17.868,8.5l-7.714,7.754A.8.8,0,0,1,9.646,16.506Z"
+										fill="#fff" />
+								</svg>
+							</div>
+							<div>
+								<p class="text-white">Integer posuere erat a ante venenatis dapibus</p>
+							</div>
+						</div>
+					</li>
+				</ul>
 
-/* text variations */
-.title-variation {
-	font-variation-settings: "wght"150, "wdth"300;
-	line-height: .95em
-}
+				<a href="#"
+					class="bg-white px-6 py-4 text-blue-500 rounded block sm:inline-block mt-8 text-center font-bold">Find
+					the
+					Fair
+					Rate</a>
+			</div>
+		</div>
+	</section>
 
-.subtitle-variation {
-	font-variation-settings: "wght"125, "wdth"400;
-	line-height: .95em
-}
+	<section class="text-center bg-white px-4 py-12 lg:px-16 md:px-8 xl:px-24 xxl:px-40">
+		<div>
+			<h2 class="text-xl font-bold text-gray-900 lg:text-3xl ">Need Help?</h2>
+			<p class="w-full lg:w-1/2 mx-auto text-base text-gray-600 mt-6">Contact our Customer Support that is always
+				ready to help you with any possible questions, problems or information.</p>
+			<a href="#" class="block text-xl text-blue-500 mt-4">support@fairrate.com</a>
+		</div>
+	</section>
 
-.regular-variation {
-	font-variation-settings: "wght"90, "wdth"500;
-	line-height: .95em
-}
+	<footer class="text-center bg-gray-200 flex flex-col px-4 py-12 sm:text-left lg:px-16 md:px-8 xl:px-24 xxl:px-40">
+		<div class="sm:flex flex-wrap">
+			<div class="sm:w-1/2 lg:w-1/5">
+				<h6 class="text-sm text-gray-600 font-bold uppercase">Contact</h6>
 
-/* <- text variations */
-/* wrapper  */
-article {
-	background-color: var(--background);
-	color: var(--color);
-	transition: all 250ms linear;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	text-align: center;
-	height: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	display: flex;
-}
+				<div class="mt-4">
+					<a href="#" class="block text-md text-gray-900">hello@fairrate.com</a>
+					<a href="#" class="block text-md text-gray-900 mt-2">+62 202 555 0117</a>
+				</div>
+			</div>
 
-/* labels -> */
-label {
-	align-items: center;
-	justify-content: center;
-	padding: 1em;
-	display: flex;
-	height: .5em;
-	width: 50%;
-	min-width: 290px;
-	position: relative;
-	margin: 0 auto;
-	font-size: 16px;
-}
+			<div class="mt-8 sm:w-1/2 sm:mt-0 lg:w-1/5 lg:mt-0">
+				<h6 class="text-sm text-gray-600 font-bold uppercase">Company</h6>
+				<ul class="mt-4">
+					<li><a href="#">Resources</a></li>
+					<li class="mt-2"><a href="#">Careers</a></li>
+				</ul>
+			</div>
 
-label span {
-	width: 32px;
-	display: block;
-}
+			<div class="mt-8 sm:w-1/2 sm:mt-12 lg:w-1/5 lg:mt-0">
+				<h6 class="text-sm text-gray-600 font-bold uppercase">Legal</h6>
+				<ul class="mt-4">
+					<li><a href="#">NMLS Consumer Access</a></li>
+					<li class="mt-2"><a href="#">Privacy Policy</a></li>
+					<li class="mt-2"><a href="#">Terms of Use</a></li>
+					<li class="mt-2"><a href="#">Disclosures & Licensing</a></li>
+				</ul>
+			</div>
 
-label span.attr {
-	position: absolute;
-	left: 50%;
-	top: -.25em;
-	color: var(--accent);
-	transform: translateX(-50%)
-}
+			<div class="mt-12 sm:w-1/2 lg:w-2/5 lg:mt-0 lg:pl-12">
+				<div><svg xmlns="http://www.w3.org/2000/svg" width="188" height="39" viewBox="0 0 188 39"
+						class="mx-auto sm:mx-0">
+						<g transform="translate(-193 -27)"><text transform="translate(280 56)" fill="#454f5b"
+								font-size="24" font-family="ArialRoundedMTBold, Arial Rounded MT">
+								<tspan x="0" y="0">FairRate</tspan>
+							</text>
+							<g transform="translate(193 27)">
+								<path d="M54,33H0L27,0,54,33ZM23,16V27h8V16H23Z" transform="translate(0 6)"
+									fill="#4ad5f6" />
+								<path d="M14,0,0,16H27L14,0" transform="translate(40)" fill="#95cdb1" />
+								<path d="M14,0,0,16H27L14,0" transform="translate(55 18)" fill="#ffc48b" />
+							</g>
+						</g>
+					</svg></div>
 
-/* Inputs -> */
-input[type='text'] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	background-color: var(--background);
-	color: var(--color);
-	border-color: currentColor;
-	border-radius: 9999px;
-	border-width: 1px;
-	flex: 1 1 auto;
-	font-variation-settings: "wght"125, "wdth"400;
-	padding: calc(.5rem - 1px) .75rem;
-	text-align: center;
-	margin: 1em 0 1em 0;
-	outline: none;
-	font-size: 24px;
-	border: 1px solid var(--accent);
-}
+				<p class="text-base text-gray-600 mt-4">Fusce dapibus, tellus ac cursus commodo, tortor mauris
+					condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna.</p>
+			</div>
+		</div>
 
-/* Input Range -> */
-/* INPUT TRACK */
-input[type='range'] {
-	--shadow: var(--accent);
-	--track-bg: var(--accent);
-	--size: 1.25em;
-	--track-border-radius: .5em;
-	--border-radius: 50%;
-	background: var(--accent);
-	appearance: none;
-	height: 2px;
-	outline: none;
-	border-radius: .5em;
-	width: 100%;
-	margin: 1.5em 0;
-	max-width: 640px;
-	display: block;
-	margin: 2em auto;
-}
+		<div class="mt-12">
+			<p class="text-sm text-gray-600">© 2018 Deivas.io, Inc. All rights reserved.</p>
+		</div>
+	</footer>
 
-/* thumb */
-/* webkit thumb */
-input[type='range']::-webkit-slider-thumb {
-	background: var(--track-bg);
-	border: 0px solid var(--shadow);
-	border-radius: var(--border-radius);
-	border: 0 solid var(--color);
-	height: var(--size);
-	width: var(--size);
-	cursor: pointer;
-	/*extra*/
-	appearance: none;
-}
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-/* mozilla thumb */
-input[type='range']::-moz-range-thumb {
-	background: var(--track-bg);
-	border: 0px solid var(--shadow);
-	border-radius: var(--border-radius);
-	border: 0 solid var(--color);
-	height: var(--size);
-	width: var(--size);
-	cursor: pointer;
-}
+	<script>
+		$('.navbar-toggler').click(function () {
+			$(this).toggleClass('active');
+			$('.navigation-menu').toggleClass('hidden');
+			$('#navbar').addClass('bg-white');
+		});
+		$(function () {
+			var navigation = $("#navbar");
+			$(window).scroll(function () {
+				var scroll = $(window).scrollTop();
+				if (scroll >= 10) {
+					navigation.addClass("bg-white xl:py-4 shadow-md");
+					navigation.removeClass("xl:py-8");
+				} else {
+					navigation.removeClass("bg-white xl:py-4 shadow-md");
+					navigation.addClass("xl:py-8");
+				}
+			});
+		});
+	</script>
+</body>
 
-/* edge thumb */
-input[type='range']::-ms-thumb {
-	background: var(--track-bg);
-	border: 0px solid var(--shadow);
-	border-radius: var(--border-radius);
-	border: 0 solid var(--color);
-	height: var(--size);
-	width: var(--size);
-	cursor: pointer;
-}
-
-/* <- Input Range */
-    </style>
-  <h1 id="title">BARLOW</h1>
-  <p class="regular-variation">One font, 
-    <span style='font-variation-settings: "wght" 150, "wdth" 490;'>m</span>
-    <span style='font-variation-settings: "wght" 188, "wdth" 300;'>a</span>
-    <span style='font-variation-settings: "wght" 150, "wdth" 415;'>n</span>
-    <span style='font-variation-settings: "wght" 108, "wdth" 300;'>y</span>
-    <span style='font-variation-settings: "wght" 22, "wdth" 300;'>/</span>
-    <span style='font-variation-settings: "wght" 150, "wdth" 410;'>S</span>
-    <span style='font-variation-settings: "wght" 165, "wdth" 380;'>t</span>
-    <span style='font-variation-settings: "wght" 78, "wdth" 320;'>y</span>
-    <span style='font-variation-settings: "wght" 88, "wdth" 450;'>l</span>
-    <span style='font-variation-settings: "wght" 150, "wdth" 300;'>e</span>
-    <span style='font-variation-settings: "wght" 22, "wdth" 500;'>s</span>
-    <span style='font-variation-settings: "wght" 188, "wdth" 500;'>.</span>
-  </p>
-</header>
-<div>
-  <input type="text" placeholder="Try it..." maxlength="20" id="input-title" autocomplete="off">
-  <p id="style-prompt">font-variation-settings: "wght" 130, "wdth" 400;</p>
-  <label for="wght">
-    <span>22</span>
-    <span class="attr">wght</span>
-    <input type="range" min="22" max="188" step="1" value="150" name="wght" id="input-wght">
-    <span>188</span>
-  </label>
-  <label for="wdth">
-    <span>300</span>
-    <span class="attr">wdth</span>
-    <input type="range" min="300" max="500" step="1" value="300" name="wdth" id="input-wdth">
-    <span>500</span>
-  </label>
-</div>
-
-</article>
-<a href="https://bienaldeilustracion.com/" target="_blank" id="logo" title="Bienal de Ilustración">    
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="45" viewBox="0 0 100 45" style="enable-background:new 0 0 100 45;" xml:space="preserve">
-  <path d="M0,9.33h6.64c1.31,0,2.37,1.05,2.37,2.31c0,0.44-0.13,0.85-0.36,1.22c0.87,0.71,1.42,1.77,1.42,2.95c0,2.12-1.79,3.87-4,3.87H0L0,9.33L0,9.33z M5.79,13.02c0-0.53-0.42-0.93-0.95-0.93s-0.96,0.41-0.96,0.93c0,0.51,0.43,0.92,0.96,0.92S5.79,13.54,5.79,13.02z M5.79,16c0-0.53-0.42-0.93-0.95-0.93S3.88,15.47,3.88,16c0,0.51,0.43,0.92,0.96,0.92S5.79,16.52,5.79,16z M10.57,9.33h4.35v10.36h-4.35V9.33z M15.73,9.33h8.2v3.5h-3.59c-0.38,0-0.66,0.29-0.66,0.68c0,0.41,0.28,0.68,0.66,0.68h1.2v1.99h2.4v3.5h-8.22V9.33z M24.71,9.33h10.2v10.36h-4.22v-6.31c0-0.47-0.43-0.8-0.88-0.8c-0.55,0-0.89,0.34-0.89,0.8v6.31h-4.22V9.33z M37.7,9.33h8.36v10.36h-4.25v-2.55h-1.84l-0.7,2.55h-4.42L37.7,9.33z M42.31,13.35c0-0.59-0.47-1.05-1.07-1.05c-0.58,0-1.08,0.47-1.08,1.05c0,0.57,0.49,1.03,1.08,1.03C41.83,14.38,42.31,13.92,42.31,13.35z M46.91,9.33h4.35v6.86h2.92v3.5H46.9V9.33H46.91z M57.01,9.33h5.37c3.06,0,5.57,2.33,5.57,5.17c0,2.85-2.52,5.17-5.57,5.17h-5.37V9.33z M63.69,14.51c0-0.81-0.68-1.48-1.52-1.48c-0.84,0-1.53,0.67-1.53,1.48s0.69,1.48,1.53,1.48C63.01,16,63.69,15.32,63.69,14.51z M68.42,9.33h8.2v3.5h-3.59c-0.38,0-0.66,0.29-0.66,0.68c0,0.41,0.28,0.68,0.66,0.68h1.2v1.99h2.4v3.5h-8.2V9.33H68.42z M0,21.85h4.35V32.2H0V21.85z M5.18,21.85h4.35v6.86h2.92v3.5H5.17V21.85H5.18z M23.05,32.19h-10.2V21.84h4.22v6.31c0,0.47,0.43,0.8,0.88,0.8c0.55,0,0.89-0.34,0.89-0.8v-6.31h4.22V32.19z M23.63,28.7h2.1l-0.75-2.73c-0.65-2.39,0.56-4.13,2.85-4.13h3.54v3.5h-1.92l0.77,2.85c0.63,2.31-0.58,4.01-2.87,4.01h-3.7v-3.5H23.63z M33.56,25.33h-2.07v-3.5h8.47v3.5h-2.07v6.86h-4.35v-6.86H33.56z M40.14,21.85h5.32c2.45,0,4.41,1.75,4.41,3.89c0,0.81-0.26,1.56-0.74,2.18h0.97v4.29h-4.22v-2.55h-1.53v2.55h-4.22V21.85z M45.96,25.86c0-0.59-0.47-1.05-1.07-1.05c-0.59,0-1.08,0.47-1.08,1.05c0,0.57,0.49,1.03,1.08,1.03C45.49,26.89,45.96,26.42,45.96,25.86z M52.84,21.85h8.36V32.2h-4.25v-2.55h-1.84l-0.7,2.55h-4.42L52.84,21.85z M57.44,25.86c0-0.59-0.47-1.05-1.07-1.05c-0.58,0-1.08,0.47-1.08,1.05c0,0.57,0.49,1.03,1.08,1.03C56.96,26.89,57.44,26.42,57.44,25.86z M61.66,27.02c0-2.85,2.48-5.17,5.57-5.17h4.98v4.91h-3.28c-0.09-0.67-0.75-1.22-1.48-1.22c-0.84,0-1.53,0.67-1.53,1.48c0,0.81,0.69,1.48,1.53,1.48c0.75,0,1.42-0.55,1.48-1.25h3.28v4.93h-4.98C64.15,32.19,61.66,29.87,61.66,27.02z M73.05,21.85h4.35V32.2h-4.35V21.85z M77.89,27.01c0-2.27,1.52-4.23,3.66-5v-1.78l4.08-1.34v2.14l-1.89,0.62c3.04,0.06,5.56,2.45,5.56,5.36c0,2.98-2.58,5.4-5.69,5.4C80.43,32.4,77.89,29.98,77.89,27.01z M85.1,27.02c0-0.81-0.69-1.48-1.51-1.48c-0.84,0-1.54,0.67-1.54,1.48c0,0.83,0.7,1.48,1.54,1.48C84.41,28.5,85.1,27.85,85.1,27.02z M89.8,21.85H100V32.2h-4.22v-6.32c0-0.47-0.43-0.8-0.88-0.8c-0.55,0-0.89,0.34-0.89,0.8v6.31H89.8V21.85z M55.69,2.92c0.12,0.14,0.18,0.32,0.18,0.55c0,0.22-0.06,0.4-0.17,0.54c-0.12,0.13-0.26,0.2-0.45,0.2H54.9c-0.01,0-0.01,0-0.01,0.01v1.09c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V2.75c0-0.02,0.01-0.04,0.04-0.04h0.66C55.41,2.71,55.57,2.79,55.69,2.92z M55.41,3.79c0.06-0.08,0.09-0.19,0.09-0.32c0-0.13-0.04-0.25-0.09-0.32c-0.06-0.08-0.14-0.12-0.25-0.12h-0.27c-0.01,0-0.01,0-0.01,0.01V3.9c0,0.01,0,0.01,0.01,0.01h0.27C55.27,3.91,55.36,3.88,55.41,3.79z M57.2,5.31L56.85,4.2c0-0.01-0.01-0.01-0.01-0.01h-0.26c-0.01,0-0.01,0-0.01,0.01v1.11c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V2.76c0-0.02,0.01-0.04,0.04-0.04h0.66c0.13,0,0.24,0.04,0.33,0.1c0.09,0.06,0.17,0.16,0.23,0.26c0.05,0.12,0.08,0.24,0.08,0.38c0,0.16-0.04,0.3-0.09,0.41c-0.06,0.12-0.15,0.2-0.26,0.25c-0.01,0.01-0.01,0.01-0.01,0.02l0.38,1.15v0.01c0,0.01-0.01,0.02-0.04,0.02h-0.28C57.22,5.35,57.21,5.34,57.2,5.31z M56.57,3.04v0.84c0,0.01,0,0.01,0.01,0.01h0.27c0.11,0,0.18-0.04,0.25-0.12c0.07-0.08,0.09-0.18,0.09-0.31c0-0.13-0.04-0.24-0.09-0.32s-0.14-0.12-0.25-0.12h-0.27C56.57,3.02,56.57,3.04,56.57,3.04z M59.11,3.02h-0.84c-0.01,0-0.01,0-0.01,0.01v0.81c0,0.01,0,0.01,0.01,0.01h0.51c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04h-0.51c-0.01,0-0.01,0-0.01,0.01V5c0,0.01,0,0.01,0.01,0.01h0.84c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04h-1.18c-0.02,0-0.04-0.01-0.04-0.04V2.74c0-0.02,0.01-0.04,0.04-0.04h1.18c0.02,0,0.04,0.01,0.04,0.04v0.24C59.14,3.01,59.13,3.02,59.11,3.02z M59.59,5.19c-0.12-0.12-0.18-0.29-0.18-0.49v-0.1c0-0.02,0.01-0.04,0.04-0.04h0.27c0.02,0,0.04,0.01,0.04,0.04v0.08c0,0.12,0.02,0.2,0.08,0.28c0.06,0.07,0.13,0.11,0.23,0.11c0.09,0,0.17-0.04,0.23-0.1c0.06-0.07,0.08-0.16,0.08-0.26c0-0.07-0.01-0.13-0.05-0.19s-0.07-0.11-0.12-0.14c-0.05-0.05-0.13-0.11-0.25-0.19c-0.13-0.1-0.23-0.18-0.3-0.24c-0.07-0.07-0.13-0.14-0.18-0.24c-0.05-0.1-0.07-0.2-0.07-0.34c0-0.2,0.06-0.36,0.18-0.48c0.12-0.12,0.27-0.18,0.46-0.18c0.2,0,0.36,0.06,0.47,0.19c0.12,0.13,0.18,0.3,0.18,0.5v0.1c0,0.02-0.01,0.04-0.04,0.04H60.4c-0.02,0-0.04-0.01-0.04-0.04v-0.1c0-0.11-0.02-0.2-0.08-0.28c-0.06-0.07-0.13-0.11-0.23-0.11c-0.08,0-0.15,0.04-0.21,0.1s-0.08,0.14-0.08,0.25c0,0.1,0.02,0.18,0.08,0.25S60,3.78,60.16,3.9c0.15,0.11,0.26,0.2,0.33,0.28c0.07,0.07,0.13,0.14,0.18,0.23c0.04,0.08,0.06,0.18,0.06,0.3c0,0.22-0.06,0.38-0.18,0.5c-0.12,0.13-0.28,0.19-0.47,0.19C59.88,5.37,59.71,5.31,59.59,5.19z M62.28,3.02h-0.84c-0.01,0-0.01,0-0.01,0.01v0.81c0,0.01,0,0.01,0.01,0.01h0.51c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04h-0.51c-0.01,0-0.01,0-0.01,0.01V5c0,0.01,0,0.01,0.01,0.01h0.84c0.02,0,0.04,0.01,0.04,0.04v0.24c0,0.02-0.01,0.04-0.04,0.04H61.1c-0.02,0-0.04-0.01-0.04-0.04V2.74c0-0.02,0.01-0.04,0.04-0.04h1.18c0.02,0,0.04,0.01,0.04,0.04v0.24C62.31,3.01,62.3,3.02,62.28,3.02z M63.76,2.71h0.28c0.02,0,0.04,0.01,0.04,0.04V5.3c0,0.02-0.01,0.04-0.04,0.04h-0.32c-0.02,0-0.04-0.01-0.04-0.04l-0.63-1.71c0,0-0.01-0.01-0.01,0c0,0-0.01,0-0.01,0.01v1.7c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V2.75c0-0.02,0.01-0.04,0.04-0.04h0.32c0.02,0,0.04,0.01,0.04,0.04l0.64,1.71c0,0.01,0.01,0.01,0.01,0.01s0.01,0,0.01-0.01v-1.7C63.73,2.73,63.74,2.71,63.76,2.71z M65.84,2.75v0.24c0,0.02-0.01,0.04-0.04,0.04h-0.49c-0.01,0-0.01,0-0.01,0.01V5.3c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.02,0-0.04-0.01-0.04-0.04V3.04c0-0.01,0-0.01-0.01-0.01h-0.46c-0.02,0-0.04-0.01-0.04-0.04V2.75c0-0.02,0.01-0.04,0.04-0.04h1.34C65.82,2.71,65.84,2.73,65.84,2.75z M67,5.31l-0.08-0.43V4.87h-0.01H66.3h-0.01v0.01l-0.08,0.43c0,0.02-0.01,0.04-0.04,0.04h-0.28c-0.01,0-0.02,0-0.02-0.01c-0.01-0.01-0.01-0.01,0-0.04l0.56-2.55c0-0.02,0.02-0.04,0.04-0.04h0.33c0.02,0,0.04,0.01,0.04,0.04l0.56,2.55v0.01c0,0.02-0.01,0.04-0.04,0.04h-0.28C67.01,5.35,67,5.34,67,5.31z M66.35,4.58h0.5c0.01,0,0.01,0,0.01-0.01l-0.25-1.33c0,0,0-0.01-0.01-0.01c0,0,0,0-0.01,0.01l-0.25,1.33C66.34,4.57,66.34,4.58,66.35,4.58z M7.68,40c-0.13,0.12-0.31,0.19-0.52,0.19H6.51c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01H7.1c0.24,0,0.42,0.06,0.56,0.18c0.13,0.12,0.2,0.3,0.2,0.53c0,0.26-0.09,0.44-0.27,0.55c-0.01,0.01-0.01,0.01-0.01,0.02c0.09,0.06,0.18,0.14,0.23,0.25s0.08,0.23,0.08,0.37C7.88,39.69,7.81,39.87,7.68,40z M6.9,37.95v0.69c0,0.01,0.01,0.02,0.02,0.02h0.19c0.11,0,0.18-0.04,0.24-0.1c0.06-0.06,0.08-0.16,0.08-0.26c0-0.12-0.02-0.22-0.08-0.28c-0.06-0.06-0.14-0.1-0.24-0.1H6.92C6.9,37.93,6.9,37.94,6.9,37.95zM7.36,39.7c0.06-0.07,0.08-0.17,0.08-0.3s-0.02-0.23-0.08-0.31c-0.06-0.08-0.13-0.11-0.24-0.11H6.91c-0.01,0-0.02,0.01-0.02,0.02v0.78c0,0.01,0.01,0.02,0.02,0.02h0.21C7.23,39.81,7.3,39.77,7.36,39.7z M8.53,40.17c-0.01-0.01-0.01-0.02-0.01-0.04V39.1v-0.02l-0.52-1.48c0,0,0-0.01,0-0.02c0-0.02,0.01-0.04,0.04-0.04h0.36c0.02,0,0.05,0.01,0.05,0.04l0.28,0.97c0,0.01,0.01,0.01,0.01,0.01s0.01,0,0.01-0.01l0.28-0.97c0.01-0.02,0.02-0.04,0.05-0.04h0.36c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0,0.04l-0.52,1.48v0.02v1.03c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01H8.55C8.55,40.18,8.54,40.18,8.53,40.17z M11.61,37.65c0.09,0.06,0.18,0.16,0.24,0.28s0.08,0.25,0.08,0.41c0,0.23-0.06,0.41-0.18,0.54s-0.27,0.2-0.46,0.2h-0.32c-0.01,0-0.02,0.01-0.02,0.02v1.04c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.7C11.4,37.56,11.52,37.58,11.61,37.65z M11.41,38.62c0.06-0.07,0.08-0.17,0.08-0.29s-0.02-0.23-0.08-0.3c-0.06-0.07-0.13-0.11-0.23-0.11h-0.23c-0.01,0-0.02,0.01-0.02,0.02v0.77c0,0.01,0.01,0.02,0.02,0.02h0.23C11.29,38.73,11.36,38.69,11.41,38.62z M12.24,40.17c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v2.54c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34C12.25,40.18,12.25,40.18,12.24,40.17z M13.2,40.02c-0.13-0.13-0.19-0.3-0.19-0.51v-1.28c0-0.22,0.06-0.38,0.19-0.51c0.13-0.13,0.3-0.19,0.51-0.19c0.21,0,0.38,0.06,0.51,0.19c0.13,0.13,0.19,0.3,0.19,0.51v0.05c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01l-0.34,0.01c-0.04,0-0.05-0.01-0.05-0.05v-0.1c0-0.08-0.02-0.16-0.07-0.22s-0.12-0.08-0.2-0.08c-0.08,0-0.14,0.02-0.19,0.08c-0.05,0.06-0.07,0.13-0.07,0.22v1.34c0,0.08,0.02,0.16,0.07,0.22c0.05,0.06,0.12,0.08,0.19,0.08c0.08,0,0.14-0.02,0.2-0.08c0.05-0.06,0.07-0.13,0.07-0.22v-0.1c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01l0.34,0.01c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.05c0,0.22-0.06,0.38-0.19,0.51c-0.13,0.13-0.3,0.19-0.51,0.19C13.5,40.22,13.33,40.16,13.2,40.02z M16.14,37.57c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.47c-0.01,0-0.02,0.01-0.02,0.02v2.19c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04v-2.19c0-0.01-0.01-0.02-0.02-0.02h-0.45c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h1.39C16.11,37.56,16.12,37.56,16.14,37.57z M16.5,40.02c-0.13-0.13-0.19-0.3-0.19-0.51v-1.26c0-0.22,0.06-0.38,0.19-0.51c0.13-0.13,0.3-0.19,0.51-0.19s0.39,0.06,0.52,0.19c0.13,0.13,0.2,0.3,0.2,0.51v1.26c0,0.22-0.07,0.38-0.2,0.51c-0.13,0.13-0.31,0.19-0.52,0.19S16.64,40.16,16.5,40.02z M17.23,39.75c0.05-0.06,0.08-0.13,0.08-0.23v-1.31c0-0.1-0.02-0.17-0.08-0.23c-0.05-0.06-0.12-0.08-0.2-0.08c-0.08,0-0.15,0.02-0.2,0.08c-0.05,0.06-0.07,0.13-0.07,0.23v1.31c0,0.1,0.02,0.17,0.07,0.23c0.05,0.06,0.12,0.08,0.2,0.08C17.11,39.84,17.18,39.81,17.23,39.75z M18.11,40.17c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v2.19c0,0.01,0.01,0.02,0.02,0.02h0.81c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-1.21C18.13,40.18,18.12,40.18,18.11,40.17z M19.65,40.17c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01s0.01,0.02,0.01,0.04v2.54c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34C19.67,40.18,19.66,40.18,19.65,40.17z M21.55,37.57c0.01-0.01,0.02-0.01,0.04-0.01h0.34c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v2.54c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.39c-0.02,0-0.04-0.01-0.05-0.04l-0.56-1.59c0-0.01-0.01-0.01-0.01-0.01c-0.01,0-0.01,0-0.01,0.01v1.58c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.34c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04V37.6c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h0.38c0.02,0,0.04,0.01,0.05,0.04l0.56,1.58c0,0.01,0.01,0.01,0.01,0.01c0.01,0,0.01,0,0.01-0.01V37.6C21.53,37.59,21.54,37.58,21.55,37.57z M23.65,37.92c-0.01,0.01-0.02,0.01-0.04,0.01h-0.81c-0.01,0-0.02,0.01-0.02,0.02v0.71c0,0.01,0.01,0.02,0.02,0.02h0.47c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-0.47c-0.01,0-0.02,0.01-0.02,0.02v0.72c0,0.01,0.01,0.02,0.02,0.02h0.81c0.01,0,0.02,0,0.04,0.01c0.01,0.01,0.01,0.02,0.01,0.04v0.29c0,0.01,0,0.02-0.01,0.04c-0.01,0.01-0.02,0.01-0.04,0.01h-1.21c-0.01,0-0.02,0-0.04-0.01c-0.01-0.01-0.01-0.02-0.01-0.04v-2.54c0-0.01,0-0.02,0.01-0.04c0.01-0.01,0.02-0.01,0.04-0.01h1.21c0.01,0,0.02,0,0.04,0.01s0.01,0.02,0.01,0.04v0.29C23.66,37.9,23.65,37.9,23.65,37.92z M35.43,5.37c-0.96,0-1.61-0.62-1.67-1.56c-0.07-1.32,0.78-2.41,2.11-2.41c1.01,0,1.61,0.69,1.66,1.54C37.62,4.37,36.73,5.37,35.43,5.37L35.43,5.37L35.43,5.37z M35.54,4.47c0.57,0,0.82-0.9,0.8-1.51c-0.01-0.34-0.18-0.66-0.57-0.66c-0.59,0-0.84,0.93-0.81,1.48C34.98,4.2,35.18,4.47,35.54,4.47L35.54,4.47L35.54,4.47z M45.93,5.28c-0.25,0.1-0.49,0.1-0.69,0.1c-1.08,0-1.66-0.6-1.72-1.6c-0.06-1.15,0.69-2.35,2.07-2.35c0.77,0,1.34,0.44,1.39,1.16c0.05,0.96-0.83,1.33-2.33,1.29c0.01,0.1,0.06,0.24,0.14,0.34c0.15,0.17,0.39,0.25,0.7,0.25c0.39,0,0.77-0.06,1.25-0.3C46.76,4.1,46.2,5.17,45.93,5.28L45.93,5.28z M45.89,2.57c-0.01-0.17-0.15-0.3-0.4-0.3c-0.5,0-0.76,0.41-0.81,0.74C45.52,3.02,45.92,2.89,45.89,2.57L45.89,2.57L45.89,2.57z M48.6,2.03c0.25,0.63,0.19,0.5,0.24,0.65l-0.01-0.04c2.22-2.45,3.78-2.5,3.78-2.5l-3.55,3.6l0.44-0.24l0.81,1.81h-1.28l-0.23-0.57c-0.11-0.28-0.14-0.42-0.21-0.65h-0.02c-1.12,1.57-2.42,1.53-2.42,1.53l1.9-2.23L47.1,1.53C47.11,1.49,48.27,1.2,48.6,2.03L48.6,2.03z M37.91,2.75c0.06-0.49,0.13-0.66-0.27-1.01c0,0,0.44-0.31,0.87-0.37c0.78-0.12,0.52,0.72,0.52,0.72h0.01c0.31-0.48,0.75-0.68,1.22-0.68c0.59,0,0.87,0.38,0.91,0.69c0.31-0.47,0.76-0.69,1.23-0.69c0.59,0,0.93,0.38,0.96,1.02c0.01,0.16-0.01,0.47-0.04,0.66c0,0-0.14,1.13-0.2,1.52c-0.06,0.4-0.09,0.8-1.23,0.71l0.27-2.1c0.02-0.16,0.04-0.31,0.02-0.45c-0.01-0.24-0.13-0.41-0.36-0.41c-0.34,0-0.65,0.48-0.75,1.23l-0.15,1.02c-0.06,0.4-0.07,0.8-1.2,0.71l0.27-2.1c0.02-0.16,0.04-0.31,0.02-0.44c-0.01-0.24-0.11-0.43-0.34-0.43c-0.34,0-0.68,0.5-0.77,1.23l-0.15,1.02c-0.06,0.4-0.07,0.8-1.2,0.71L37.91,2.75L37.91,2.75z M33.15,5.29c-0.2,0.04-0.52,0.08-0.82,0.08c-1.31,0-2.24-0.78-2.3-1.98c-0.06-1.09,0.4-1.9,1.12-2.38c0.49-0.34,1.08-0.49,1.8-0.48c0.26,0,0.55,0.04,0.74,0.08c0.64,0.14,0.06,1.07,0.06,1.07c-0.18-0.07-0.47-0.14-0.87-0.14s-0.81,0.12-1.07,0.34c-0.37,0.3-0.56,0.78-0.53,1.4c0.04,0.71,0.55,1.16,1.32,1.16c0.32,0,0.68-0.07,1.07-0.24C33.67,4.19,33.46,5.23,33.15,5.29L33.15,5.29z M50.88,4.7c0.14,0,0.25,0.12,0.25,0.26s-0.11,0.26-0.25,0.26c-0.14,0-0.25-0.12-0.25-0.26S50.74,4.7,50.88,4.7L50.88,4.7L50.88,4.7z M50.88,4.65c-0.17,0-0.31,0.14-0.31,0.31c0,0.18,0.14,0.32,0.31,0.32c0.18,0,0.31-0.14,0.31-0.32C51.19,4.8,51.04,4.65,50.88,4.65L50.88,4.65L50.88,4.65z M50.82,5h0.04c0.05,0,0.07,0.01,0.07,0.06c0.01,0.05,0.01,0.08,0.02,0.1h0.06c0-0.01-0.01-0.04-0.02-0.08c-0.01-0.05-0.02-0.08-0.06-0.08l0,0C50.96,4.98,51,4.95,51,4.9c0-0.04-0.01-0.06-0.04-0.07c-0.02-0.01-0.06-0.02-0.11-0.02c-0.04,0-0.07,0-0.09,0.01v0.35h0.06L50.82,5L50.82,5z M50.82,4.84c0.01,0,0.02,0,0.04,0c0.06,0,0.08,0.04,0.08,0.06c0,0.05-0.04,0.06-0.08,0.06h-0.04V4.84L50.82,4.84z M30.93,40.22h-1.82V34.3h5.72c2.45,0,4.41,1.75,4.41,3.89c0,1.17-0.58,2.24-1.53,2.95h1.2v3.51h-9.26L30.93,40.22z M35.35,38.49c0-0.67-0.57-1.22-1.25-1.22c-0.68,0-1.23,0.54-1.23,1.22c0,0.67,0.56,1.22,1.23,1.22 C34.78,39.71,35.35,39.17,35.35,38.49z M39.49,39.46c0-2.95,2.54-5.36,5.72-5.36c3.11,0,5.69,2.42,5.69,5.36c0,2.98-2.58,5.4-5.69,5.4 C42.03,44.86,39.49,42.44,39.49,39.46z M46.7,39.48c0-0.81-0.69-1.48-1.51-1.48c-0.84,0-1.54,0.67-1.54,1.48 c0,0.83,0.7,1.48,1.54,1.48C46,40.97,46.7,40.31,46.7,39.48z M53,40.22h-1.82V34.3h5.72c2.45,0,4.41,1.75,4.41,3.89c0,1.17-0.58,2.24-1.53,2.95h1.2v3.51h-9.26L53,40.22z M57.42,38.49 c0-0.67-0.57-1.22-1.25-1.22s-1.23,0.54-1.23,1.22c0,0.67,0.56,1.22,1.23,1.22S57.42,39.17,57.42,38.49z M67.88,42.77H61.9V34.3h4.22v3.96c0,0.5,0.37,0.86,0.88,0.86s0.89-0.36,0.89-0.86V34.3h4.22v10.36h-4.22V42.77z"/></svg>
-</a>
-<a href="" target="_blank" id="work-link">
-<figure>
-  <img src="https://bienaldeilustracion.com/finalista/erne-vigo/eco.preview.jpg" alt="">
-  <figcaption>Colors extracted from Eco by Erno Vigo.</figcaption>
-</figure>
-</a>
-<script>
-const PALETTES = [{
-src:"/kaori-andrea-hayama-fukumoto/senores-pequenos.preview.jpg",
-bg:"#E0AC9D",
-color:"#B34234",
-accent:"#C08A75"
-},{
-src:"/octavio-bec/el-arcano-de-las-flores.preview.jpg",
-bg:"#151417",
-color:"#D5D3DC",
-accent:"#7D7A84"
-},{
-src:"/erne-vigo/eco.preview.jpg",
-bg:"#9D7C83",
-color:"#FEFCFA",
-accent:"#D4B1A0"
-},{
-src:"/joaquin-carreno-alonso/tlacuachin.preview.jpg",
-bg:"#304446",
-color:"#C2904B",
-accent:"#9B9A92"
-},{
-src:"/g-m-meave/woman-into-stardust.preview.jpg",
-bg:"#4f008f",
-color:"#FFFFFF",
-accent:"#F10300"
-},{
-src:"/gabriela-fernanda-orozco/el-rapto.preview.jpg",
-bg:"#0F0A06",
-color:"#DAC299",
-accent:"#83663D"
-},{
-src:"/diego-escobar/sin-miedo.preview.jpg",
-bg:"#E9E9E9",
-color:"#505050",
-accent:"#9B9B9B"
-},{
-src:"/blcksstar/rutina-mundana.preview.jpg",
-bg:"#192C4A",
-color:"#fa7066",
-accent:"#767E8E"
-},{
-src:"/daniela-mendoza/un-espacio-seguro-para-mi-andar.preview.jpg",
-bg:"#BDB8A5",
-color:"#AD4131",
-accent:"#A58F5A"
-},{
-src:"/andrea-devia-nuno/as-tight-as-you-can.preview.jpg",
-bg:"#4032C5",
-color:"#F39090",
-accent:"#768A63"
-},{
-src:"/carolina-marin-londono/viejismo.preview.jpg",
-bg:"#B8B5B9",
-color:"#254F9B",
-accent:"#E2141E"
-},{
-src:"/carol-cuquetto/alegria-e-furia.preview.jpg",
-bg:"#EFB02B",
-color:"#EC0F05",
-accent:"#EE5305"
-},{
-src:"/meri/chiquiticx.preview.jpg",
-bg:"#2c2c2c",
-color:"#46B26A",
-accent:"#145B2B"
-},{
-src:"/champu-chinito/proxima-estacion.preview.jpg",
-bg:"#9F2A03",
-color:"#C5A431",
-accent:"#636D07"
-},{
-src:"/luna-ana/head-on-fire.preview.jpg",
-bg:"#13150E",
-color:"#E04D0F",
-accent:"#8B826A"
-},{
-src:"/daniel-chonillo/canoa.preview.jpg",
-bg:"#757885",
-color:"#E1D9D9",
-accent:"#C6B495"
-},{
-src:"/lynda-m/volatil.preview.jpg",
-bg:"#000000",
-color:"#D73749",
-accent:"#9B3645"
-},{
-src:"/m-a-cervantes/por-ver.preview.jpg",
-bg:"#16228B",
-color:"#749180",
-accent:"#8D5D5B"
-},{
-src:"/fede-di-pila/hora-magica.preview.jpg",
-bg:"#9F354A",
-color:"#E85B62",
-accent:"#3A304E"
-},{
-src:"/maricarmen-zapatero/sopa-de-cebolla.preview.jpg",
-bg:"#398F6D",
-color:"#DFC53F",
-accent:"#F1F0EE"
-},{
-src:"/carlos-cea/natural-karma.preview.jpg",
-bg:"#5EA14E",
-color:"#DDDBE5",
-accent:"#C9B04B"
-},{
-src:"/ana-sofia-navia-lopez/intermitencia.preview.jpg",
-bg:"#A09E9F",
-color:"#423D42",
-accent:"#5E5C5E"
-},{
-src:"/alvaro-ardiles/this-must-be-the-place.preview.jpg",
-bg:"#F1E4A9",
-color:"#9D6656",
-accent:"#63A4BC"
-},{
-src:"/jesus-gutierrez-miranda/magia-no11.preview.jpg",
-bg:"#CF5E2E",
-color:"#FFFFFF",
-accent:"#CF9441"
-},{
-src:"/lic-dominguez/un-ovni-en-1993.preview.jpg",
-bg:"#3C4246",
-color:"#D8C9C3",
-accent:"#7D827C"
-},{
-src:"/elena-caltz/isobel.preview.jpg",
-bg:"#5C5C5C",
-color:"#FDFDFD",
-accent:"#A2A2A2"
-},{
-src:"/jhonatan-montalvo-chuyo/a-emperatriz.preview.jpg",
-bg:"#744FAE",
-color:"#E9D2B6",
-accent:"#C0983C"
-},{
-src:"/marinoshki/eventos-canonicos-en-playas-de-tijuana.preview.jpg",
-bg:"#243848",
-color:"#827A8B",
-accent:"#4C261E"
-},{
-src:"/charlotte/alora.preview.jpg",
-bg:"#599B5F",
-color:"#EDD1C3",
-accent:"#EC9D98"
-},{
-src:"/emilia-schettino/paralisis-del-sueno.preview.jpg",
-bg:"#728A4F",
-color:"#F6DA9D",
-accent:"#CA4526"
-},{
-src:"/renata-lobaton-flores/dinosaurios.preview.jpg",
-bg:"#FAF8CF",
-color:"#61A3E1",
-accent:"#74883F"
-},{
-src:"/victor-cabanillas/sin-titulo.preview.jpg",
-bg:"#C78B69",
-color:"#5A2016",
-accent:"#A54022"
-},{
-src:"/isidro-r-esquivel/retratos-infernales-la-mina.preview.jpg",
-bg:"#272727",
-color:"#DADADA",
-accent:"#4D4D4D"
-},{
-src:"/caro-fuego/tiempo-aparte.preview.jpg",
-bg:"#E4B4A5",
-color:"#C54B28",
-accent:"#6999BB"
-},{
-src:"/rodrigo-aguilar-vazquez/mercadito-de-sonidos.preview.jpg",
-bg:"#735973",
-color:"#CE7092",
-accent:"#5C172C"
-},{
-src:"/rayame-maria/nos-acostumbramos-a-los-lobos.preview.jpg",
-bg:"#6B472C",
-color:"#0C0A05",
-accent:"#C29167"
-},{
-src:"/elisa-malo/siniestros-del-dia-y-la-noche.preview.jpg",
-bg:"#161616",
-color:"#F4F4F4",
-accent:"#9B9B9B"
-},{
-src:"/alex-servin/ilustrarama.preview.jpg",
-bg:"#E00502",
-color:"#f9e6d5",
-accent:"#3A9789"
-},{
-src:"/jokczan-ruiz/melodia-del-mar.preview.jpg",
-bg:"#618FA1",
-color:"#F5F5F1",
-accent:"#DA9763"
-},{
-src:"/carles-ballesteros/descubrimiento.preview.jpg",
-bg:"#61530F",
-color:"#ffb300",
-accent:"#B9431A"
-},{
-src:"/liao/abraxas.preview.jpg",
-bg:"#0A0807",
-color:"#DDCBB2",
-accent:"#877965"
-},{
-src:"/eugenio-cristo-vivanco/oye.preview.jpg",
-bg:"#7689A9",
-color:"#DDDED9",
-accent:"#606F92"
-},{
-src:"/belen-valverde/familia-elegida.preview.jpg",
-bg:"#493070",
-color:"#DD971E",
-accent:"#748999"
-},{
-src:"/marco-vulgo/la-loteria-de-la-calle.preview.jpg",
-bg:"#3695A1",
-color:"#D3BF9F",
-accent:"#D7AA33"
-},{
-src:"/ro-menendez/fe.preview.jpg",
-bg:"#CCBDDC",
-color:"#405AAF",
-accent:"#F3EDE4"
-},{
-src:"/natalia-pajaro/desdoblandome.preview.jpg",
-bg:"#89A3DC",
-color:"#2A4AB9",
-accent:"#D44531"
-},{
-src:"/maia-judith/caballo.preview.jpg",
-bg:"#A05224",
-color:"#FAF601",
-accent:"#FFF292"
-},{
-src:"/achac/quesadillas.preview.jpg",
-bg:"#CACBC2",
-color:"#0C2C4F",
-accent:"#E3D4A5"
-},{
-src:"/gora/trama.preview.jpg",
-bg:"#D98605",
-color:"#198970",
-accent:"#D61A01"
-},{
-src:"/numecaniq/la-tirania-de-los-ojos.preview.jpg",
-bg:"#020404",
-color:"#F00708",
-accent:"#4F5557"
-},{
-src:"/tamara-cruz-gutierrez/vaiven-salado.preview.jpg",
-bg:"#010710",
-color:"#0F8978",
-accent:"#29258D"
-},{
-src:"/daniel-barreto/ciclos-de-esencia.preview.jpg",
-bg:"#14130c",
-color:"#BF4E48",
-accent:"#07215A"
-},{
-src:"/matt-figueroa/un-pequeno-pulque.preview.jpg",
-bg:"#D79B74",
-color:"#B24225",
-accent:"#582719"
-},{
-src:"/aldair-gonzalez-sanchez/el-baile-del-esqueleto.preview.jpg",
-bg:"#000000",
-color:"#FFFFFF",
-accent:"#9F4A3B"
-},{
-src:"/david-salinas/tomarse-el-tiempo-para-volver-a-la-primera-casa.preview.jpg",
-bg:"#9E935B",
-color:"#182D52",
-accent:"#658B46"
-},{
-src:"/brenda-battaglia-andrade/memoria-intervenida.preview.jpg",
-bg:"#3B4529",
-color:"#D5C8A2",
-accent:"#469B65"
-},{
-src:"/valentina-wilson/entre-humo-y-mariposas.preview.jpg",
-bg:"#050404",
-color:"#A64C1B",
-accent:"#B8A590"
-},{
-src:"/karina-cervantes/el-desierto-tambien-descansa.preview.jpg",
-bg:"#0C090C",
-color:"#DC6D90",
-accent:"#3A7381"
-},{
-src:"/eslovam/introspeccion.preview.jpg",
-bg:"#837D84",
-color:"#131112",
-accent:"#C8C4C8"
-},{
-src:"/edgar-mt/poder.preview.jpg",
-bg:"#F24E66",
-color:"#0B1B0E",
-accent:"#A1B362"
-},{
-src:"/roberta-di-paolo/bicho.preview.jpg",
-bg:"#1C1A12",
-color:"#A5CB67",
-accent:"#6A9655"
-},{
-src:"/jesus-benitez/daf.preview.jpg",
-bg:"#0C0B9B",
-color:"#BDB4C1",
-accent:"#C4745F"
-},{
-src:"/rosenfeldtown/maloco-amazonico.preview.jpg",
-bg:"#A9C3AE",
-color:"#130E08",
-accent:"#A56E47"
-},{
-src:"/daniel-berman/st-de-la-serie-de-banistas.preview.jpg",
-bg:"#E28B67",
-color:"#22151B",
-accent:"#8D0201"
-},{
-src:"/edillys-palomino/dias-de-verano-y-la-espera.preview.jpg",
-bg:"#88ACEB",
-color:"#ECE6D4",
-accent:"#E69E9D"
-},{
-src:"/cesar-st-martin/sprinting-mass.preview.jpg",
-bg:"#A3A3A2",
-color:"#3E3E3E",
-accent:"#41423D"
-},{
-src:"/disturbed-child/por-la-boca-muere-el-pez.preview.jpg",
-bg:"#C6B99D",
-color:"#4C4639",
-accent:"#818075"
-},{
-src:"/alex-lechuga/al-final-de-todo-como-piensas-reaccionar.preview.jpg",
-bg:"#bf5349",
-color:"#F3D19B",
-accent:"#6E8F8A"
-},{
-src:"/luis-safah/arabia-saucito.preview.jpg",
-bg:"#83563D",
-color:"#090704",
-accent:"#C09A79"
-},{
-src:"/andrea-daniela-paredes-velazquez/alas.preview.jpg",
-bg:"#562109",
-color:"#C7CF9A",
-accent:"#AE431E"
-},{
-src:"/daniell-black/my-bff-the-8th.preview.jpg",
-bg:"#53a04f",
-color:"#2d5c83",
-accent:"#D94334"
-},{
-src:"/aaron-cruz/corazon.preview.jpg",
-bg:"#956D87",
-color:"#D6958C",
-accent:"#94394B"
-},{
-src:"/lore-mondragon/amaranto.preview.jpg",
-bg:"#534737",
-color:"#EDD277",
-accent:"#B49D68"
-},{
-src:"/felipe-cavalcante/honk-brasilia-la-musica-brota-en-la-capital.preview.jpg",
-bg:"#091053",
-color:"#EAEFF1",
-accent:"#184C2A"
-},{
-src:"/jordan-ruy-alvarado-chavez/en-lo-oculto.preview.jpg",
-bg:"#242646",
-color:"#C6330B",
-accent:"#D98C2B"
-},{
-src:"/leandro-mangado/calaveras.preview.jpg",
-bg:"#A25843",
-color:"#D5D6CF",
-accent:"#5B463D"
-},{
-src:"/tonny-furia/morpho-1.preview.jpg",
-bg:"#080303",
-color:"#B94530",
-accent:"#294ABB"
-},{
-src:"/azul-portillo/futuro.preview.jpg",
-bg:"#636C98",
-color:"#DCE4EC",
-accent:"#A6CFF5"
-},{
-src:"/irish/sosiego.preview.jpg",
-bg:"#1DB7BF",
-color:"#FFFFFF",
-accent:"#CF2ECF"
-},{
-src:"/jess-bianxi/fijacion.preview.jpg",
-bg:"#64508A",
-color:"#E2996A",
-accent:"#E86A66"
-},{
-src:"/cata-gonzalez/que-ningun-trans-sea-olvidadx.preview.jpg",
-bg:"#5F6B97",
-color:"#FFF",
-accent:"#C679A0"
-},{
-src:"/maria-tuti/creador.preview.jpg",
-bg:"#8B5EC7",
-color:"#FCCA01",
-accent:"#581D16"
-},{
-src:"/somosgallitos/el-ciclo-de-la-vida.preview.jpg",
-bg:"#D4B7DE",
-color:"#0D0C88",
-accent:"#6F43A6"
-},{
-src:"/ulises-mendicutty/libre.preview.jpg",
-bg:"#ec74b4",
-color:"#F4F0F4",
-accent:"#5F52AB"
-},{
-src:"/valeria-hipocampo/tauro.preview.jpg",
-bg:"#F8C76C",
-color:"#77843D",
-accent:"#E89851"
-},{
-src:"/nubikini/inspiring.preview.jpg",
-bg:"#DFBDAF",
-color:"#EA1E03",
-accent:"#3C90E5"
-},{
-src:"/melissa-gabriela/sabana-imaginaria.preview.jpg",
-bg:"#A4D5D8",
-color:"#54473E",
-accent:"#ECE25F"
-},{
-src:"/israpop/como-te-gustaria-ser-recordado.preview.jpg",
-bg:"#000000",
-color:"#F6F6F6",
-accent:"#626262"
-},{
-src:"/mario-maple/viajero-traveler.preview.jpg",
-bg:"#827D87",
-color:"#FFFFFF",
-accent:"#BFBFCD"
-},{
-src:"/yaguas/perdon-hermano-por-tan-poco.preview.jpg",
-bg:"#2B3943",
-color:"#A8A29E",
-accent:"#8C1A17"
-},{
-src:"/cumi-d-tamayo/san-miguel-arcangel.preview.jpg",
-bg:"#3384AF",
-color:"#D6C228",
-accent:"#C5255A"
-},{
-src:"/florencia-pernicone/terror.preview.jpg",
-bg:"#B75847",
-color:"#DABE8A",
-accent:"#6CC092"
-},{
-src:"/fernanda-serafim/ilustracao-realista-de-fantasia.preview.jpg",
-bg:"#60220C",
-color:"#CF9669",
-accent:"#C8310D"
-},{
-src:"/javier-arjona/navegar-un-mar-de-datos.preview.jpg",
-bg:"#62A9B1",
-color:"#1D1B18",
-accent:"#C0C3BD"
-},{
-src:"/youkonejo/yocoya.preview.jpg",
-bg:"#171615",
-color:"#F7F7F6",
-accent:"#7F8078"
-},{
-src:"/federico-calandria/fuerza-natural.preview.jpg",
-bg:"#50A2B0",
-color:"#DDE8E5",
-accent:"#8F8C43"
-},{
-src:"/pete-banenelli/desaparecer.preview.jpg",
-bg:"#0F171F",
-color:"#D2DAE1",
-accent:"#8E6D6F"
-},{
-src:"/amira/promesa-de-amor.preview.jpg",
-bg:"#E85156",
-color:"#FFFFFF",
-accent:"#4C719C"
-},{
-src:"/daniel-kondo/andar-com-fe.preview.jpg",
-bg:"#525820",
-color:"#EAC60E",
-accent:"#BD4C13"
-},{
-src:"/otto-etraud/hermafroditx.preview.jpg",
-bg:"#E8DDA9",
-color:"#A1581A",
-accent:"#738942"
-},{
-src:"/karina-cocq/sinfonia-para-una-semilla.preview.jpg",
-bg:"#99946D",
-color:"#DFE2D1",
-accent:"#668586"
-},{
-src:"/davihero/puntos-de-vista.preview.jpg",
-bg:"#BE6287",
-color:"#F4F5F2",
-accent:"#5D92B4"
-},{
-src:"/santiago-solis/julio.preview.jpg",
-bg:"#c3c3c3",
-color:"#000000",
-accent:"#323232"
-},{
-src:"/comrayo/al-otro-lado.preview.jpg",
-bg:"#797D82",
-color:"#FFFFFE",
-accent:"#D19C5A"
-},{
-src:"/miguel-velasco/este-es-mi-barrio-la-valentin-gomez-farias.preview.jpg",
-bg:"#513A9D",
-color:"#ECEBF0",
-accent:"#B2383D"
-},{
-src:"/andrea-caboara/penumbra.preview.jpg",
-bg:"#15110e",
-color:"#A2D5C9",
-accent:"#2C433C"
-},{
-src:"/majo-corona/sonatas-en-la-selva-onirica.preview.jpg",
-bg:"#171c16",
-color:"#C9764B",
-accent:"#523121"
-},{
-src:"/vero-anaya/chulada.preview.jpg",
-bg:"#8E8573",
-color:"#8E304F",
-accent:"#1A2E43"
-},{
-src:"/daniel-lievano/renacido.preview.jpg",
-bg:"#F9D1B0",
-color:"#AA3115",
-accent:"#E9C469"
-},{
-src:"/rafa-kahlo/un-dia-en-el-metro.preview.jpg",
-bg:"#79C1BC",
-color:"#161616",
-accent:"#F4F5F5"
-},{
-src:"/fabiana-moch/caminantes.preview.jpg",
-bg:"#768990",
-color:"#BDBDB8",
-accent:"#8E875B"
-},{
-src:"/bruno-valasse/perro-raro-etiqueta-de-vino.preview.jpg",
-bg:"#675535",
-color:"#F3F1E4",
-accent:"#56190C"
-},{
-src:"/davespart/que-rabia-todo-veo.preview.jpg",
-bg:"#150A0C",
-color:"#5492C3",
-accent:"#95200C"
-},{
-src:"/nan4san/deva.preview.jpg",
-bg:"#ddd2a6",
-color:"#d1442e",
-accent:"#96b793"
-},{
-src:"/mariana-riera/o-que-vamos-comer-hoje-ou-panico-e-gloria-no-paraiso.preview.jpg",
-bg:"#729694",
-color:"#0D1817",
-accent:"#2A4F50"
-},{
-src:"/manuel-rodriguez-sanchez/viaje-al-mictlan.preview.jpg",
-bg:"#1D4F25",
-color:"#D09655",
-accent:"#D75C22"
-},{
-src:"/alejandra-garcia-y-gutierrez/expandirse.preview.jpg",
-bg:"#607762",
-color:"#CC9265",
-accent:"#851818"
-},{
-src:"/leon-chavez/desatandonos.preview.jpg",
-bg:"#2C2C2C",
-color:"#A9A9A9",
-accent:"#5A5A5A"
-},{
-src:"/nico-gonzalez/atardecer-en-el-tabo.preview.jpg",
-bg:"#D85E0D",
-color:"#EFF2EA",
-accent:"#E3A911"
-},{
-src:"/mariana-villanueva-segovia/las-kokotxas-de-mi-papa.preview.jpg",
-bg:"#084606",
-color:"#F6F9F6",
-accent:"#E7AF13"
-}]
-</script>
+</html>
